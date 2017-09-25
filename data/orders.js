@@ -20,7 +20,7 @@ module.exports.generateOrders = (payTypes, customers) => {
   
       return [year, month, day].join('-');
     }
-    let customer_id = payTypes[i].customer_id;
+    let customer_id = Math.floor(Math.random() * customers.length) + 1;
     // console.log('cust id', customer_id);
     // console.log('cut', customers[i]);
     // console.log('ot', payTypes[i]);
