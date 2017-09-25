@@ -1,10 +1,50 @@
-module.exports.customers = [
-    { firstName: 'Fred', lastName: 'Smith', city: 'St. Louis', street: '500 Somewho Lane', state: 'Iowa', zip: '12345', phone: '123-555-5309' },
-    { firstName: 'Yolanda', lastName: 'Garrison', city: 'Monkeys Elbow', street: '123 Mockingbird Ln', state: 'Iowa', zip: '12345', phone: '123-555-5309' },
-    { firstName: 'Maurice', lastName: 'Moss', city: 'Fanta Say', street: '3098 Moms House Way', state: 'Iowa', zip: '12345', phone: '123-555-5309' },
-    { firstName: 'Fred', lastName: 'Sanford', city: 'Nashvegas', street: '45 Bigdummy Rd', state: 'Iowa', zip: '12345', phone: '123-555-5309' },
-    { firstName: 'Cher', lastName: null, city: 'New Detroit', street: '500 Somewhen Lane Apt 1', state: 'Iowa', zip: '12345', phone: '123-555-5309' },
-    { firstName: 'Danny', lastName: 'Elfman', city: 'Emerald City', street: '666 Beetlejuice Way', state: 'Iowa', zip: '12345', phone: '123-555-5309' },
-    { firstName: 'Myrtle', lastName: 'Moaning', city: 'Pleasantville', street: '500 Somewhat Lane', state: 'Iowa', zip: '12345', phone: '123-555-5309' },
-    { firstName: 'Ben', lastName: 'Gentle', city: 'Cedar Rapids', street: '1 The Woods', state: 'Iowa', zip: '12345', phone: '123-555-5309'  }
-  ]
+'use strict';
+
+const faker = require('faker')
+
+module.exports.generateCustomers = () => {
+  let customers = [];
+
+  for (let i = 0; i < 10; i++) {
+    let first_name = faker.name.firstName();
+    let last_name = faker.name.lastName();
+    
+    //TAKES DATE AND RETURNS DATE FORMAT THAT FAKER CAN USE
+    function formatDate(data) {
+      var date = new Date(data),
+          month = '' + (date.getMonth() + 1),
+          day = '' + date.getDate(),
+          year = date.getFullYear();
+  
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+  
+      return [year, month, day].join('-');
+    }
+
+    //LAST LOGIN TO BE VARIED, BUT CANNOT BE BEFORE CREATION DATE
+    let past_date = faker.date.past(2);
+    let now = Date.now();
+    let creation_date = past_date.toISOString();
+    let date_range = faker.date.between(formatDate(past_date), formatDate(now));
+    let last_login = date_range.toISOString();
+
+    let email = faker.internet.email();
+    let address = faker.address.streetAddress();
+    let phone = faker.phone.phoneNumberFormat();
+
+    customers.push({
+      past_date,
+      date_range,
+      "first_name": first_name,
+      "last_name": last_name,
+      "creation_date": creation_date,
+      "last_login": last_login,
+      "email": email,
+      "address": address,
+      "phone_number": phone
+    });
+  }
+  
+  return customers;
+}
