@@ -3,7 +3,8 @@ const { createNewCustomer } = require("../app/models/Customer");
 const { promptNewCustomer } = require("../app/controllers/customerCtrl");
 // customer model test
 
-// createNewFunction is a function and fetchCustomers returns an objects
+
+// createNewFunction is a function 
 describe("main", () => {
   describe("createNewCustomer creates customer", () => {
     it("should exist", () => {
@@ -19,5 +20,3 @@ describe("promptNewCustomer", () => {
     isFunction(promptNewCustomer);
   });
 });
-
-// Pro Tip: Remember, we are testing features, not functions. Require whichever modules you need to test a feature
