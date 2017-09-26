@@ -1,13 +1,13 @@
-const { assert: {equal, isFunction, is } } = require('chai');
+const { assert: {equal, isFunction, isObject, isArray } } = require('chai');
 const { addNewPaymentType, getAllPaymentTypes } = require('../app/models/PaymentType');
 const { promptNewPayment } = require('../app/controllers/paymentCtrl');
 
 const path = require('path');
 const sqlite3 = require("sqlite3").verbose();
-const dbPath = path.resolve(__dirname, '..', '..', 'db', 'bangazon.sqlite');
+const dbPath = path.resolve(__dirname, '..', 'db', 'bangazon.sqlite');
 const db = new sqlite3.Database(dbPath);
 
-//Payment Model tests
+// Josh: Payment Model tests
 describe('Payment type Model', () => {
     it('should be a function', () => {
       isFunction(addNewPaymentType);
@@ -15,27 +15,17 @@ describe('Payment type Model', () => {
     it('should return promise', () => {
       isFunction(getAllPaymentTypes);
     });
+    // Josh: Makes sure is promise and returns array
     it('resolves as promised', function() {
+      getAllPaymentTypes()
+      .then(Data => {
+        isArray(Data);
+      })
+    });
 
-      const myPromise = new Promise( (resolve, reject) => {
-          db.all(`SELECT * FROM Payment_Types`, (err, Data) => {
-            if (err) return reject(err);
-            resolve(Data);
-          });
-          myPromise.then( (result) => {
-            expect(result).to.equal(Data);
-            done();
-          });
-        });
-      });
-
-    //   return Promise.resolve('Data')
-    //       .then(function(getAllPaymentTypes) { expect(getAllPaymentTypes).to.equal('Data'); })
-    //       .catch(function(getAllPaymentTypes) { throw new Error('was not supposed to fail'); });
-    // });
 });
 
-//Payment Ctrl tests
+// Josh: Payment Ctrl tests
 describe('Payment type Ctrl', () => {
   it('should be a function', () => {
     isFunction(promptNewPayment);

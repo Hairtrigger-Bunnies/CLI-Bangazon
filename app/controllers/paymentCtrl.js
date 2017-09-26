@@ -3,6 +3,7 @@
 const prompt = require('prompt');
 const { addNewPaymentType } = require('../models/PaymentType')
 
+//Josh: USE TO ENTER IN TYPE AND ACC NUM TO CREATE NEW PAYTYPE
 module.exports.promptNewPayment = () => {
   return new Promise( (resolve, reject) => {
     prompt.get([{
@@ -21,4 +22,9 @@ module.exports.promptNewPayment = () => {
     })
   });
 };
+
+//Josh: CALLS MODEL FUNC TO ADD PAYTYPE TO DB
+module.exports.addPayment = (data) => {
+  addNewPaymentType(data);
+}
 
