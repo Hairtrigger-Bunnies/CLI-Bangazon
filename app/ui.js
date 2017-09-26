@@ -4,15 +4,20 @@
 const { red, magenta, blue } = require("chalk");
 const prompt = require("prompt");
 const colors = require("colors/safe");
-const path = require("path");
 const { Database } = require("sqlite3").verbose();
-const { createNewCustomer } = require("../app/models/Customer");
 prompt.message = colors.blue("Bangazon Corp");
 
-// app modules
-const { promptNewCustomer } = require("./controllers/customerCtrl");
+const path = require("path");
+const sqlite3 = require("sqlite3").verbose();
+const dbPath = path.resolve(__dirname, "..", "db", "bangazon.sqlite");
+console.log(dbPath);
+const db = new sqlite3.Database(dbPath);
 
-const db = new Database(path.join(__dirname, "..", "db", "bangazon.sqlite"));
+// app Ctrls
+const { promptNewCustomer } = require("./controllers/customerCtrl");
+const { promptNewOrder } = require("./controllers/orderCtrl");
+// const { promptNewProduct } = require('./controllers/productCtrl');
+const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 
 prompt.start();
 
@@ -25,6 +30,30 @@ let mainMenuHandler = (err, userInput) => {
       createNewCustomer(custData);
       console.log("customer data to save", custData);
       //save customer to db
+    });
+  }
+  // if(userInput = '2') {
+  //   promptChooseCustomer()
+  //   .then( (custData) => {
+  //     console.log('choose customer', custData );
+  //     //save customer to db
+  //   });
+  // }
+  if (userInput.choice == "3") {
+    promptNewPayment().then(custData => {
+      console.log("Payment option to save", custData);
+      addPayment(custData);
+    });
+  }
+  // if(userInput = '4') {
+  //   promptChooseProduct()
+  //   .then( (custData) => {
+  //     console.log('choose product to add', custData );
+  //   });
+  // }
+  if (userInput.choice == "5") {
+    promptNewOrder().then(custData => {
+      console.log("order data to save", custData);
     });
   }
 };
@@ -45,6 +74,7 @@ module.exports.displayWelcome = () => {
   ${magenta("5.")} Complete an order
   ${magenta("6.")} See product popularity
   ${magenta("7.")} Leave Bangazon!`);
+    console.log("");
     prompt.get(
       [
         {
