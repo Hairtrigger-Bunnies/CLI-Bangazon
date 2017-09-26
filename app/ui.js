@@ -1,36 +1,38 @@
 'use strict';
 
 // 3rd party libs
-const {red, magenta, blue} = require("chalk");
+const { red, magenta, blue } = require('chalk');
 const prompt = require('prompt');
-const colors = require("colors/safe");
+const colors = require('colors/safe');
 const { Database } = require('sqlite3').verbose();
-prompt.message = colors.blue("Bangazon Corp");
+prompt.message = colors.blue('Bangazon Corp');
 
 const path = require('path');
-const sqlite3 = require("sqlite3").verbose();
+const sqlite3 = require('sqlite3').verbose();
 const dbPath = path.resolve(__dirname, '..', 'db', 'bangazon.sqlite');
 console.log(dbPath);
 const db = new sqlite3.Database(dbPath);
-
-
 
 // app Ctrls
 const { promptNewCustomer } = require('./controllers/customerCtrl');
 const { promptNewOrder } = require('./controllers/orderCtrl');
 // const { promptNewProduct } = require('./controllers/productCtrl');
 const { promptNewPayment, addPayment } = require('./controllers/paymentCtrl');
-
+const { promptNewCustomer } = require('./controllers/customerCtrl');
+const { promptNewOrder } = require('./controllers/orderCtrl');
+// const { promptNewProduct } = require('./controllers/productCtrl');
+const { promptNewPayment, addPayment } = require('./controllers/paymentCtrl');
 
 prompt.start();
 
 let mainMenuHandler = (err, userInput) => {
-  console.log("user input", userInput);
+  console.log('user input', userInput);
   // This could get messy quickly. Maybe a better way to parse the input?
-  if(userInput.choice == '1') {
-    promptNewCustomer()
-    .then( (custData) => {
-      console.log('customer data to save', custData );
+  if ((userInput = '1')) {
+    promptNewCustomer().then(custData => {
+      //calling createNewCustomer with custData passed into it
+      createNewCustomer(custData);
+      console.log('customer data to save', custData);
       //save customer to db
     });
   }
@@ -41,10 +43,9 @@ let mainMenuHandler = (err, userInput) => {
   //     //save customer to db
   //   });
   // }
-  if(userInput.choice == '3') {
-    promptNewPayment()
-    .then( (custData) => {
-      console.log('Payment option to save', custData );
+  if (userInput.choice == '3') {
+    promptNewPayment().then(custData => {
+      console.log('Payment option to save', custData);
       addPayment(custData);
     });
   }
@@ -54,17 +55,18 @@ let mainMenuHandler = (err, userInput) => {
   //     console.log('choose product to add', custData );
   //   });
   // }
-  if(userInput.choice == '5') {
-    promptNewOrder()
-    .then( (custData) => {
-      console.log('order data to save', custData );
+  if (userInput.choice == '5') {
+    promptNewOrder().then(custData => {
+      console.log('order data to save', custData);
     });
   }
 };
 
 module.exports.displayWelcome = () => {
-  let headerDivider = `${magenta('*********************************************************')}`
-  return new Promise( (resolve, reject) => {
+  let headerDivider = `${magenta(
+    '*********************************************************'
+  )}`;
+  return new Promise((resolve, reject) => {
     console.log(`
   ${headerDivider}
   ${magenta('**  Welcome to Bangazon! Command Line Ordering System  **')}
