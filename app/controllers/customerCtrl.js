@@ -30,7 +30,7 @@ module.exports.promptNewCustomer = () => {
         {
           name: "state",
           message: "Please Enter Customer State",
-          description: "Enter state (KY)",
+          description: "Enter state (NC)",
           type: "string",
           required: true
         },
