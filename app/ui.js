@@ -4,20 +4,23 @@
 const {red, magenta, blue} = require("chalk");
 const prompt = require('prompt');
 const colors = require("colors/safe");
-const path = require('path');
 const { Database } = require('sqlite3').verbose();
 prompt.message = colors.blue("Bangazon Corp");
+
+const path = require('path');
+const sqlite3 = require("sqlite3").verbose();
+const dbPath = path.resolve(__dirname, '..', 'db', 'bangazon.sqlite');
+console.log(dbPath);
+const db = new sqlite3.Database(dbPath);
+
+
 
 // app Ctrls
 const { promptNewCustomer } = require('./controllers/customerCtrl');
 const { promptNewOrder } = require('./controllers/orderCtrl');
 // const { promptNewProduct } = require('./controllers/productCtrl');
-const { promptNewPayment } = require('./controllers/paymentCtrl');
+const { promptNewPayment, addPayment } = require('./controllers/paymentCtrl');
 
-//app Models
-const { addNewPaymentType } = require('./models/PaymentType');
-
-const db = new Database(path.join(__dirname, '..', 'db', 'bangazon.sqlite'));
 
 prompt.start();
 
@@ -38,11 +41,11 @@ let mainMenuHandler = (err, userInput) => {
   //     //save customer to db
   //   });
   // }
-  if(userInput = '3') {
+  if(userInput.choice == '3') {
     promptNewPayment()
     .then( (custData) => {
       console.log('Payment option to save', custData );
-      addNewPaymentType(custData);      
+      addPayment(custData);
     });
   }
   // if(userInput = '4') {
@@ -73,6 +76,7 @@ module.exports.displayWelcome = () => {
   ${magenta('5.')} Complete an order
   ${magenta('6.')} See product popularity
   ${magenta('7.')} Leave Bangazon!`);
+  console.log('');  
     prompt.get([{
       name: 'choice',
       description: 'Please make a selection'

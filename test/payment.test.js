@@ -1,18 +1,31 @@
-const { assert: {equal, isFunction } } = require('chai');
-const { addNewPaymentType } = require('../app/models/PaymentType');
+const { assert: {equal, isFunction, isObject, isArray } } = require('chai');
+const { addNewPaymentType, getAllPaymentTypes } = require('../app/models/PaymentType');
 const { promptNewPayment } = require('../app/controllers/paymentCtrl');
 
-//Payment Model tests
+const path = require('path');
+const sqlite3 = require("sqlite3").verbose();
+const dbPath = path.resolve(__dirname, '..', 'db', 'bangazon.sqlite');
+const db = new sqlite3.Database(dbPath);
+
+// Josh: Payment Model tests
 describe('Payment type Model', () => {
     it('should be a function', () => {
       isFunction(addNewPaymentType);
     });
-    // it('should... ', () => {
-      
-    // })
+    it('should return promise', () => {
+      isFunction(getAllPaymentTypes);
+    });
+    // Josh: Makes sure is promise and returns array
+    it('resolves as promised', function() {
+      getAllPaymentTypes()
+      .then(Data => {
+        isArray(Data);
+      })
+    });
+
 });
 
-//Payment Ctrl tests
+// Josh: Payment Ctrl tests
 describe('Payment type Ctrl', () => {
   it('should be a function', () => {
     isFunction(promptNewPayment);
