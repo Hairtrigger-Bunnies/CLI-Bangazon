@@ -8,8 +8,14 @@ const path = require('path');
 const { Database } = require('sqlite3').verbose();
 prompt.message = colors.blue("Bangazon Corp");
 
-// app modules
-const { promptNewCustomer } = require('./controllers/customerCtrl')
+// app Ctrls
+const { promptNewCustomer } = require('./controllers/customerCtrl');
+const { promptNewOrder } = require('./controllers/orderCtrl');
+// const { promptNewProduct } = require('./controllers/productCtrl');
+const { promptNewPayment } = require('./controllers/paymentCtrl');
+
+//app Models
+const { addNewPaymentType } = require('./models/PaymentType');
 
 const db = new Database(path.join(__dirname, '..', 'db', 'bangazon.sqlite'));
 
@@ -18,11 +24,37 @@ prompt.start();
 let mainMenuHandler = (err, userInput) => {
   console.log("user input", userInput);
   // This could get messy quickly. Maybe a better way to parse the input?
-  if(userInput = '1') {
+  if(userInput.choice == '1') {
     promptNewCustomer()
     .then( (custData) => {
       console.log('customer data to save', custData );
       //save customer to db
+    });
+  }
+  // if(userInput = '2') {
+  //   promptChooseCustomer()
+  //   .then( (custData) => {
+  //     console.log('choose customer', custData );
+  //     //save customer to db
+  //   });
+  // }
+  if(userInput = '3') {
+    promptNewPayment()
+    .then( (custData) => {
+      console.log('Payment option to save', custData );
+      addNewPaymentType(custData);      
+    });
+  }
+  // if(userInput = '4') {
+  //   promptChooseProduct()
+  //   .then( (custData) => {
+  //     console.log('choose product to add', custData );
+  //   });
+  // }
+  if(userInput.choice == '5') {
+    promptNewOrder()
+    .then( (custData) => {
+      console.log('order data to save', custData );
     });
   }
 };
