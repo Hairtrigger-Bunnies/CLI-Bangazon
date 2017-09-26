@@ -20,8 +20,10 @@ module.exports.createNewCustomer = customer => {
       `INSERT INTO customers VALUES (
         null,      
       "${splitName[0]}",
-      "${splitName[1]}", null,
-     null, null,
+      "${splitName[1]}", 
+      null,
+      null, 
+      null,
       "${address}",
       "${customer.phone}")`,
       (err, Customer) => {
