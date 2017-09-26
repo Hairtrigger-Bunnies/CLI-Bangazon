@@ -2,7 +2,7 @@
 
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/bangazoncorp.sqlite');
+const db = new sqlite3.Database('./db/bangazon.sqlite');
 const dbPath = path.resolve(__dirname, '..', '..', 'db', 'bangazon.sqlite');
 
 module.exports.addSingleProduct = (body) => {
