@@ -1,10 +1,22 @@
-const { assert: {equal} } = require('chai');
+const { assert: { equal, isFunction, isObject } } = require("chai");
+const { createNewCustomer } = require("../app/models/Customer");
+const { promptNewCustomer } = require("../app/controllers/customerCtrl");
+// customer model test
 
-// Placed here to confirm test file runs properly
-// describe('just a test', () => {
-//   it('should be equal', () => {
-//     equal( 3, 1 + 2)
-//   });
-// });
 
-// Pro Tip: Remember, we are testing features, not functions. Require whichever modules you need to test a feature
+// createNewFunction is a function 
+describe("main", () => {
+  describe("createNewCustomer creates customer", () => {
+    it("should exist", () => {
+      isFunction(createNewCustomer);
+    });
+  });
+});
+
+// customer controller test
+
+describe("promptNewCustomer", () => {
+  it("should be a function", () => {
+    isFunction(promptNewCustomer);
+  });
+});

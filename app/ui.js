@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 // 3rd party libs
-const {red, magenta, blue} = require("chalk");
-const prompt = require('prompt');
+const { red, magenta, blue } = require("chalk");
+const prompt = require("prompt");
 const colors = require("colors/safe");
 const { Database } = require('sqlite3').verbose();
 prompt.message = colors.blue("Bangazon Corp");
@@ -21,16 +21,17 @@ const { promptNewOrder } = require('./controllers/orderCtrl');
 // const { promptNewProduct } = require('./controllers/productCtrl');
 const { promptNewPayment, addPayment } = require('./controllers/paymentCtrl');
 
-
 prompt.start();
 
 let mainMenuHandler = (err, userInput) => {
   console.log("user input", userInput);
   // This could get messy quickly. Maybe a better way to parse the input?
-  if(userInput.choice == '1') {
-    promptNewCustomer()
-    .then( (custData) => {
-      console.log('customer data to save', custData );
+  if ((userInput = "1")) {
+    promptNewCustomer().then(custData => {
+      //calling createNewCustomer with custData passed into it
+      createNewCustomer(custData);
+      console.log("customer data to save", custData);
+
       //save customer to db
     });
   }
@@ -63,11 +64,13 @@ let mainMenuHandler = (err, userInput) => {
 };
 
 module.exports.displayWelcome = () => {
-  let headerDivider = `${magenta('*********************************************************')}`
-  return new Promise( (resolve, reject) => {
+  let headerDivider = `${magenta(
+    "*********************************************************"
+  )}`;
+  return new Promise((resolve, reject) => {
     console.log(`
   ${headerDivider}
-  ${magenta('**  Welcome to Bangazon! Command Line Ordering System  **')}
+  ${magenta("**  Welcome to Bangazon! Command Line Ordering System  **")}
   ${headerDivider}
   ${magenta('1.')} Create a customer account
   ${magenta('2.')} Choose active customer
