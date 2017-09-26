@@ -1,5 +1,4 @@
 'use strict';
-
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/bangazon.sqlite');
@@ -12,12 +11,20 @@ module.exports.addSingleProduct = (body) => {
       '${body.price}', 
       '${body.description}',
       '${body.type_id}',
-      '${body.customer_id}')`, (err, products) => {
-      if (err) {
-        console.log("error", err);
-        return reject(err);
-      }
-      resolve(products);
+      '${body.customer_id}')`, function(err) {
+        if (err) return reject(err);
+        resolve(this.lastID);
+    });
+  });
+};
+
+module.exports.getSingleProduct = (id) => {
+  return new Promise( (resolve, reject) => {
+    db.each(`SELECT *
+            FROM Products
+            WHERE ProductID = ${id}`, (err, product) => {
+      if (err) return reject(err);
+      resolve(product);
     });
   });
 };
