@@ -28,6 +28,7 @@ db.serialize(function() {
 
   //CREATE TABLES AND COLUMNS
   db.run(`CREATE TABLE IF NOT EXISTS Products (
+
       ProductID INTEGER PRIMARY KEY, 
       title TEXT,
       price INT,
