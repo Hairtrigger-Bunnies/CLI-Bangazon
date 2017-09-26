@@ -7,7 +7,7 @@ const sqlite3 = require("sqlite3").verbose();
 const dbPath = path.resolve(__dirname, "..", "..", "db", "bangazon.sqlite");
 const db = new sqlite3.Database(dbPath);
 
-// function to insert new customer into the database, createNewCustomer with customer(custData from ui) passed in
+// function to insert new customer into the database, createNewCustomer with customer(custData from ui) passed in and declaring address so the three statements can go into one column (DR)
 module.exports.createNewCustomer = customer => {
   // .split(" ") split the name on the space between first and last [0]= first name  in array [1]= second name in array
   let splitName = customer.name.split(" ");
