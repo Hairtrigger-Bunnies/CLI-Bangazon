@@ -1,6 +1,7 @@
 'use strict';
 
 const prompt = require('prompt');
+const { addNewPaymentType } = require('../models/PaymentType')
 
 module.exports.promptNewPayment = () => {
   return new Promise( (resolve, reject) => {
@@ -20,3 +21,4 @@ module.exports.promptNewPayment = () => {
     })
   });
 };
+

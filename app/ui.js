@@ -15,7 +15,7 @@ const { promptNewOrder } = require('./controllers/orderCtrl');
 const { promptNewPayment } = require('./controllers/paymentCtrl');
 
 //app Models
-const { addNewPaymentType } = require('./models/PaymentType');
+const { addNewPaymentType, getAllPaymentTypes } = require('./models/PaymentType');
 
 const db = new Database(path.join(__dirname, '..', 'db', 'bangazon.sqlite'));
 
@@ -42,7 +42,8 @@ let mainMenuHandler = (err, userInput) => {
     promptNewPayment()
     .then( (custData) => {
       console.log('Payment option to save', custData );
-      addNewPaymentType(custData);      
+      addNewPaymentType(custData);
+      getAllPaymentTypes();  
     });
   }
   // if(userInput = '4') {
