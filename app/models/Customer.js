@@ -34,6 +34,7 @@ module.exports.createNewCustomer = customer => {
   });
 };
 
+// (DR) Function to get all customers from the customer table and resolves Data
 module.exports.getCustomers = () => {
   return new Promise((resolve, reject) => {
     db.all(`SELECT * FROM Customers`, (err, Data) => {
@@ -41,4 +42,4 @@ module.exports.getCustomers = () => {
       resolve(Data);
     });
   });
-}
+};
