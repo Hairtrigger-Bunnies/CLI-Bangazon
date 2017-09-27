@@ -55,9 +55,7 @@ module.exports.promptUpdateProduct = (data) => {
             description: "Select a product to update",
             type: "string",
             required: "true"
-      }],
-        // selectProduct
-      );
+      }])
     });
   });
 };
