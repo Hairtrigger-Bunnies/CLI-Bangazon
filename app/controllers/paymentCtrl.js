@@ -1,7 +1,8 @@
 'use strict';
 
 const prompt = require('prompt');
-const { addNewPaymentType } = require('../models/PaymentType')
+const { addNewPaymentType } = require('../models/PaymentType');
+const { getActiveCustomer } = require('../models/ActiveCustomer');
 
 //Josh: USE TO ENTER IN TYPE AND ACC NUM TO CREATE NEW PAYTYPE
 module.exports.promptNewPayment = () => {
@@ -18,6 +19,8 @@ module.exports.promptNewPayment = () => {
       required: true
     }], function(err, results) {
       if (err) return reject(err);
+      //Josh: ADDS ACTIVE CUSTOMER ID TO RESULTS
+      results.customer_id = getActiveCustomer();
       resolve(results);
     })
   });

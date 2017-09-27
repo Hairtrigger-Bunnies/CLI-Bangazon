@@ -2,6 +2,7 @@
 
 const prompt = require('prompt');
 const { addNewProduct } = require('../models/Product');
+const { getActiveCustomer } = require('../models/ActiveCustomer');
 const { removeSingleProduct } = require('../models/Product');
 
 // Josh: PROMPTS FOR NEW PRODUCT
@@ -29,6 +30,8 @@ module.exports.promptNewProduct = (req, res, next) => {
       required: true
     }], function(err, results) {
       if (err) return reject(err);
+      //Josh: ADDS CUSTOMER ID TO RESULTS
+      results.customer_id = getActiveCustomer();
       resolve(results);
     })
   });
