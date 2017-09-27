@@ -5,6 +5,8 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/bangazon.sqlite');
 const dbPath = path.resolve(__dirname, '..', '..', 'db', 'bangazon.sqlite');
 
+const { setActiveCustomer, getActiveCustomer } = require('./ActiveCustomer');
+
 
 // Josh: TAKES PROMPTS AND INSERTS INTO DB
 module.exports.addNewProduct = (data) => {
