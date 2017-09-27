@@ -64,6 +64,7 @@ let mainMenuHandler = (err, userInput) => {
       console.log("order data to save", orderData);
     });
   }
+  // if (userInput.choice == "10")
 };
 
 const displayWelcome = () => {
