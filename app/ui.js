@@ -28,42 +28,48 @@ const { createNewCustomer } = require("./models/Customer");
 prompt.start();
 
 let mainMenuHandler = (err, userInput) => {
-  console.log("user input", userInput);
-  if (userInput.choice == "1") {
-    // calling promptNewCustomer when user inputs 1 (DR)
-    promptNewCustomer().then(custData => {
-      //calling createNewCustomer with custData passed into it (DR)
-      createNewCustomer(custData);
-      console.log("customer data to save", custData);
-      //save customer to db
-    });
-  }
-  //Josh: SELECT CUSTOMER TO SET ACTIVE
-  if (userInput.choice == "2") {
-    promptActiveCustomer().then(custData => {
-      console.log("active customer", custData);
-    });
-  }
-  if (userInput.choice == "3") {
-    //Josh: CALLS PROMPTS FROM PAYMENTCTRL
-    promptNewPayment().then(payData => {
-      console.log("Payment option to save", payData);
-      //Josh: CALLS CONTROLLER FUNC TO ADD DATA TO DB
-      addPayment(payData);
-    });
-  }
-  if (userInput.choice == "4") {
-    promptNewProduct().then(prodData => {
-      console.log("choose product to add", prodData);
-      addProduct(prodData);
-    });
-  }
-  if (userInput.choice == "6") {
-    //Josh: CALLS PROMPTS FROM ORDERCTRL
-    promptCompleteOrder().then(orderData => {
-      console.log("order data to save", orderData);
-    });
-  }
+  console.log('user input', userInput);
+    if (userInput.choice == '1') {
+      promptNewCustomer().then(custData => {
+        //calling createNewCustomer with custData passed into it
+        createNewCustomer(custData);
+        console.log('customer data to save', custData);
+        //save customer to db
+      });
+    }
+    //Josh: SELECT CUSTOMER TO SET ACTIVE
+    if (userInput.choice == '2') {
+      promptActiveCustomer().then(custData => {
+        console.log('active customer', custData );
+      })
+    }
+    if (userInput.choice == '3') {
+      //Josh: CALLS PROMPTS FROM PAYMENTCTRL
+      promptNewPayment().then(payData => {
+        console.log('Payment option to save', payData);
+        //Josh: CALLS CONTROLLER FUNC TO ADD DATA TO DB
+        addPayment(payData);
+      });
+    }
+    if(userInput.choice == '4') {
+      promptNewProduct()
+      .then( (prodData) => {
+        console.log('choose product to add', prodData );
+        addProduct(prodData)
+      });
+    }
+    if (userInput.choice == '6') {
+      //Josh: CALLS PROMPTS FROM ORDERCTRL
+      promptCompleteOrder().then(orderData => {
+        console.log('order data to save', orderData);
+      });
+    }
+    if (userInput.choice == '8') {
+      // AH & JT CALLS PROMPTS FROM PRODUCTSCTRL
+      promptUpdateProduct().then(productData => {
+        console.log('select a product to update', productData);
+      });
+    }
 };
 
 const displayWelcome = () => {

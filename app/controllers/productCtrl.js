@@ -1,7 +1,9 @@
 'use strict';
 
 const prompt = require('prompt');
-const { addNewProduct } = require('../models/Product');
+const { addNewProduct, getCustomerProducts } = require('../models/Product');
+const {red, magenta, blue} = require("chalk");
+const colors = require("colors/safe");
 
 // Josh: PROMPTS FOR NEW PRODUCT
 module.exports.promptNewProduct = (req, res, next) => {
@@ -37,3 +39,26 @@ module.exports.promptNewProduct = (req, res, next) => {
 module.exports.addProduct = (data) => {
   addNewProduct(data);
 }
+
+// AH & JT: FROM MODEL, UPDATES PROD TO DB
+module.exports.promptUpdateProduct = (data) => {
+  // updateProduct(data);
+  return new Promise( (resolve, reject) => {
+    getCustomerProducts()
+    .then( (data) => {
+      for (let i=0; i < data.length; i++) {
+        console.log( `${magenta(i + 1 + ".")} ${data[i].title} hello`)
+    }
+      console.log("");
+      prompt.get([{
+            name: "name",
+            description: "Select a product to update",
+            type: "string",
+            required: "true"
+      }],
+        // selectProduct
+      );
+    });
+  });
+};
+
