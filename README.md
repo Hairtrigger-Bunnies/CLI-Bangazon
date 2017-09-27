@@ -2,7 +2,7 @@
 
 ## The Command Line Ordering System
 
-In this group project, you will be allowing a user to interact with a basic product ordering database via a command line interface.
+This group project allows a user to interact with a basic product ordering database via a command line interface.
 
 ## Ordering System Interface
 
@@ -26,10 +26,46 @@ In this group project, you will be allowing a user to interact with a basic prod
 12. Leave Bangazon!
 >
 ```
+# Installing Technologies
 
-## Requirements
+## SQLite
 
-You will create a series of prompts that will allow the user to create various types of data in your ordering system.
+### For OSX Users
 
-1. Start with writing unit tests. As a group, determine the core functionality of the application. Define classes, controllers and methods that you think you need to build. Do that before writing the implementation code for core logic. DO NOT WRITE TESTS FOR THE USER INTERFACE (menu and prompts).
-1. All classes and methods must be fully documented.
+```brew install sqlite```
+
+### For Windows Users
+
+Visit the [SQLite downloads](https://www.sqlite.org/download.html) and download the 64-bit DLL (x64) for SQLite version, unzip and install it.
+
+## SQL Browser
+
+The [DB browser for SQLite](http://sqlitebrowser.org/) will let you view, query and manage your databases during the course.
+
+### Text Editor
+
+Download and use any text editor of your choosing: SublimeText, VS Code, etc.
+
+## For both OSX and Windows users
+
+### NPM
+1. Run ```npm init —y``` in the terminal to initial npm so further commands may be used
+2. Run ```npm install —save -dev``` to install the node modules both globally and save it to the package.json in one step.
+
+### Node.js
+  1. Run ```npm install node.js``` in the terminal to be able to run node
+
+
+### Faker.js
+1. Run ```npm install faker``` to install fakerJS that will allow you access to its data
+
+
+### DB Browser
+1. Within SQLite, open the database “bangazoncorp.sqlite” from “db” folder within VS Code to access the DB Browser and its data within SQLite.
+
+### Postman
+1. Go to “https://www.getpostman.com/“ and download Postman in oder to run tests for GET, POST, PUT, DELETE from data in SQLite
+
+## Using the CLI
+
+
