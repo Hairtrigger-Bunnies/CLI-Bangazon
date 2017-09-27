@@ -22,6 +22,9 @@ const {
 const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 
+// app models
+const { createNewCustomer } = require("./models/Customer");
+
 prompt.start();
 
 let mainMenuHandler = (err, userInput) => {
