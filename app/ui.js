@@ -15,12 +15,10 @@ const db = new sqlite3.Database(dbPath);
 // app Ctrls
 const { promptNewCustomer } = require("./controllers/customerCtrl");
 const { promptCompleteOrder } = require("./controllers/orderCtrl");
-const {
-  promptActiveCustomer,
-  getActive
-} = require("./controllers/activeCustomerCtrl");
+const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
 const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
+const { setActiveCustomer } = require('./models/ActiveCustomer');
 
 // app models
 const { createNewCustomer } = require("./models/Customer");
@@ -36,12 +34,16 @@ let mainMenuHandler = (err, userInput) => {
       createNewCustomer(custData);
       console.log("customer data to save", custData);
       //save customer to db
+      module.exports.displayWelcome();            
     });
   }
   //Josh: SELECT CUSTOMER TO SET ACTIVE
   if (userInput.choice == "2") {
     promptActiveCustomer().then(custData => {
-      console.log("active customer", custData);
+      console.log("active customer", custData.id);
+      //Josh: SETS ACTIVE CUSTOMER BASED ON PROMPT
+      setActiveCustomer(custData);
+      module.exports.displayWelcome();
     });
   }
   if (userInput.choice == "3") {
@@ -50,18 +52,22 @@ let mainMenuHandler = (err, userInput) => {
       console.log("Payment option to save", payData);
       //Josh: CALLS CONTROLLER FUNC TO ADD DATA TO DB
       addPayment(payData);
+      module.exports.displayWelcome();      
     });
   }
   if (userInput.choice == "4") {
     promptNewProduct().then(prodData => {
       console.log("choose product to add", prodData);
+      //Josh: BRINGS IN PROMPT DATA TO ADD TO DB
       addProduct(prodData);
+      module.exports.displayWelcome();
     });
   }
   if (userInput.choice == "6") {
     //Josh: CALLS PROMPTS FROM ORDERCTRL
     promptCompleteOrder().then(orderData => {
       console.log("order data to save", orderData);
+      module.exports.displayWelcome();            
     });
   }
 };
