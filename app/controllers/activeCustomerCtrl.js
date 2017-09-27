@@ -1,6 +1,6 @@
 'use strict';
 
-const { setActiveCustomer, getActiveCustomer } = require('../models/activeCustomer');
+const { setActiveCustomer, getActiveCustomer } = require('../models/ActiveCustomer');
 const { getCustomers } = require('../models/Customer');
 
 const prompt = require('prompt');
