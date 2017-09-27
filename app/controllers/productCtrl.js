@@ -1,11 +1,39 @@
 'use strict';
 
-const { addSingleProduct } = require('../models/Product');
+const prompt = require('prompt');
+const { addNewProduct } = require('../models/Product');
 
-module.exports.setProduct = (req, res, next) => {
-    addSingleProduct(req.body)
-    .then( (data) => {
-      res.status(200).json(data);
+// Josh: PROMPTS FOR NEW PRODUCT
+module.exports.promptNewProduct = (req, res, next) => {
+    return new Promise( (resolve, reject) => {
+    prompt.get([{
+      name: 'title',
+      description: 'Enter product name',
+      type: 'string',
+      required: true
+    }, {
+      name: 'price',
+      description: 'Enter price',
+      type: 'string',
+      required: true
+    }, {
+      name: 'description',
+      description: 'Enter description of product',
+      type: 'string',
+      required: true
+    }, {
+      name: 'type',
+      description: 'Enter product type',
+      type: 'string',
+      required: true
+    }], function(err, results) {
+      if (err) return reject(err);
+      resolve(results);
     })
-    .catch( (err) => next(err));
+  });
 };
+
+//Josh: FROM MODEL, ADDS PROD TO DB
+module.exports.addProduct = (data) => {
+  addNewProduct(data);
+}

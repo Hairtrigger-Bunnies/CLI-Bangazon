@@ -1,6 +1,6 @@
-const { assert: {equal, isFunction, isNumber, deepEqual, isObject, isArray} } = require('chai');
+const { assert: {equal, isFunction, isNumber, deepEqual, isObject, isArray, assert} } = require('chai');
 const { setActiveCustomer, getActiveCustomer } = require('../app/models/activeCustomer');
-const { activeCustomer } = require('../app/controllers/activeCustomerCtrl');
+const { promptActiveCustomer } = require('../app/controllers/activeCustomerCtrl');
 
 
 //Tests for the activeCustomer model
@@ -14,8 +14,7 @@ describe('active customers model', () => {
     isFunction(getActiveCustomer);
   });
 
-  it('setActiveCustomer should accept a number argument that determines the ID of the active customer object',  () => {
-    setActiveCustomer(8);
+  it('should accept data',  () => {
     getActiveCustomer()
     .then( (customer) => {
       isObject(customer);
@@ -26,13 +25,23 @@ describe('active customers model', () => {
     });
   });
 
+  //Josh: HAD TO GIVE IT PROPER DATA TO TEST
+  it('setActiveCustomer should accept a number argument that determines the ID of the active customer object', function() {
+    let data = {
+      name: ''
+    }
+    setActiveCustomer(data, '5');
+
+    assert.equal(data.name, '5');
+  });
+
 });
 
 //Tests for active customer controller
 describe('active customers controller', () => {
   
     it('should be a function', () => {
-      isFunction(activeCustomer);
+      isFunction(promptActiveCustomer);
     });
   
   

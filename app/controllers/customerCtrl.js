@@ -2,6 +2,7 @@
 
 const prompt = require("prompt");
 
+// (DR) Prompt to enter customer info if no err then resolves results
 module.exports.promptNewCustomer = () => {
   return new Promise((resolve, reject) => {
     prompt.get(
