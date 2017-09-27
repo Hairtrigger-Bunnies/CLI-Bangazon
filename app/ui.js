@@ -35,6 +35,7 @@ let mainMenuHandler = (err, userInput) => {
     if (userInput.choice == '2') {
       promptActiveCustomer().then(custData => {
         console.log('active customer', custData );
+        getActive(custData);
       })
     }
     if (userInput.choice == '3') {
