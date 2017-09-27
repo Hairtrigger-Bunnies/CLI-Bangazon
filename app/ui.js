@@ -10,59 +10,57 @@ prompt.message = colors.blue('Bangazon Corp');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 const dbPath = path.resolve(__dirname, '..', 'db', 'bangazon.sqlite');
-console.log(dbPath);
 const db = new sqlite3.Database(dbPath);
 
 // app Ctrls
 const { promptNewCustomer } = require('./controllers/customerCtrl');
-const { promptNewOrder } = require('./controllers/orderCtrl');
-// const { promptNewProduct } = require('./controllers/productCtrl');
-const { promptNewPayment, addPayment } = require('./controllers/paymentCtrl');
-const { promptNewCustomer } = require('./controllers/customerCtrl');
-const { promptNewOrder } = require('./controllers/orderCtrl');
-// const { promptNewProduct } = require('./controllers/productCtrl');
+const { promptCompleteOrder } = require('./controllers/orderCtrl');
+const { promptActiveCustomer, getActive } = require('./controllers/activeCustomerCtrl');
+const { promptNewProduct, addProduct } = require('./controllers/productCtrl');
 const { promptNewPayment, addPayment } = require('./controllers/paymentCtrl');
 
 prompt.start();
 
 let mainMenuHandler = (err, userInput) => {
   console.log('user input', userInput);
-  // This could get messy quickly. Maybe a better way to parse the input?
-  if ((userInput = '1')) {
-    promptNewCustomer().then(custData => {
-      //calling createNewCustomer with custData passed into it
-      createNewCustomer(custData);
-      console.log('customer data to save', custData);
-      //save customer to db
-    });
-  }
-  // if(userInput = '2') {
-  //   promptChooseCustomer()
-  //   .then( (custData) => {
-  //     console.log('choose customer', custData );
-  //     //save customer to db
-  //   });
-  // }
-  if (userInput.choice == '3') {
-    promptNewPayment().then(custData => {
-      console.log('Payment option to save', custData);
-      addPayment(custData);
-    });
-  }
-  // if(userInput = '4') {
-  //   promptChooseProduct()
-  //   .then( (custData) => {
-  //     console.log('choose product to add', custData );
-  //   });
-  // }
-  if (userInput.choice == '5') {
-    promptNewOrder().then(custData => {
-      console.log('order data to save', custData);
-    });
-  }
+    if (userInput.choice == '1') {
+      promptNewCustomer().then(custData => {
+        //calling createNewCustomer with custData passed into it
+        createNewCustomer(custData);
+        console.log('customer data to save', custData);
+        //save customer to db
+      });
+    }
+    //Josh: SELECT CUSTOMER TO SET ACTIVE
+    if (userInput.choice == '2') {
+      promptActiveCustomer().then(custData => {
+        console.log('active customer', custData );
+      })
+    }
+    if (userInput.choice == '3') {
+      //Josh: CALLS PROMPTS FROM PAYMENTCTRL
+      promptNewPayment().then(payData => {
+        console.log('Payment option to save', payData);
+        //Josh: CALLS CONTROLLER FUNC TO ADD DATA TO DB
+        addPayment(payData);
+      });
+    }
+    if(userInput.choice == '4') {
+      promptNewProduct()
+      .then( (prodData) => {
+        console.log('choose product to add', prodData );
+        addProduct(prodData)
+      });
+    }
+    if (userInput.choice == '6') {
+      //Josh: CALLS PROMPTS FROM ORDERCTRL
+      promptCompleteOrder().then(orderData => {
+        console.log('order data to save', orderData);
+      });
+    }
 };
 
-module.exports.displayWelcome = () => {
+const displayWelcome = () => {
   let headerDivider = `${magenta(
     '*********************************************************'
   )}`;
@@ -74,19 +72,21 @@ module.exports.displayWelcome = () => {
   ${magenta('1.')} Create a customer account
   ${magenta('2.')} Choose active customer
   ${magenta('3.')} Create a payment option
-  ${magenta('4.')} Add product to shopping cart
-  ${magenta('5.')} Complete an order
-  ${magenta('6.')} See product popularity
-  ${magenta('7.')} Leave Bangazon!`);
-    console.log(');
-    prompt.get(
-      [
-        {
-          name: 'choice',
-          description: 'Please make a selection'
-        }
-      ],
-      mainMenuHandler
-    );
+  ${magenta('4.')} Add product to sell
+  ${magenta('5.')} Add product to shopping cart
+  ${magenta('6.')} Complete an order
+  ${magenta('7.')} Remove customer product
+  ${magenta('8.')} Update product information
+  ${magenta('9.')} Show stale products
+  ${magenta('10.')} Show customer revenue report
+  ${magenta('11.')} See product popularity
+  ${magenta('12.')} Leave Bangazon!`);
+  console.log('');  
+    prompt.get([{
+      name: 'choice',
+      description: 'Please make a selection'
+    }], mainMenuHandler );
   });
 };
+
+module.exports = { displayWelcome };

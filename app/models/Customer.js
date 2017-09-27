@@ -1,6 +1,6 @@
 "use strict";
 const { Database } = require("sqlite3").verbose();
-const { setActiveCustomer, getActiveCustomer } = require("../activeCustomer");
+const { setActiveCustomer, getActiveCustomer } = require("./ActiveCustomer");
 const prompt = require("prompt");
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
@@ -33,3 +33,12 @@ module.exports.createNewCustomer = customer => {
     );
   });
 };
+
+module.exports.getCustomers = () => {
+  return new Promise((resolve, reject) => {
+    db.all(`SELECT * FROM Customers`, (err, Data) => {
+      if (err) return reject(err);
+      resolve(Data);
+    });
+  });
+}
