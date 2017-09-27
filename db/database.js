@@ -1,7 +1,8 @@
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.database("db/bangazon.sqlite");
+const db = new sqlite3.Database("db/bangazon.sqlite");
 
+//Josh: TAKING THE SAME DATA FROM PREVIOUS SPRINT, THIS CREATES THE DB FOR THE TABLES WE WILL BE USING
 //requiring in data for tables
 const { product_types } = require("../data/product_types");
 const { generateCustomers } = require("../data/customers");

@@ -1,6 +1,6 @@
 const { assert: {equal, isFunction, isArray} } = require('chai');
 const { getOrder } = require('../app/models/Order');
-const { promptNewOrder, getAllPaymentTypes } = require('../app/controllers/orderCtrl');
+const { promptCompleteOrder, getAllPaymentTypes } = require('../app/controllers/orderCtrl');
 
 // Josh: Order Model tests
 describe('Payment type Model', () => {
@@ -12,7 +12,7 @@ describe('Payment type Model', () => {
 // Josh: Order Ctrl tests
 describe('Order Ctrl', () => {
   it('should be a function', () => {
-    isFunction(promptNewOrder);
+    isFunction(promptCompleteOrder);
   });
   // it('resolves as promised', function() {
   //   getAllPaymentTypes()
