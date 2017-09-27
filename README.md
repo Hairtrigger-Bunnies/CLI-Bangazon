@@ -63,8 +63,11 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 ### DB Browser
 1. Within SQLite, open the database “bangazoncorp.sqlite” from “db” folder within VS Code to access the DB Browser and its data within SQLite.
 
-### Postman
-1. Go to “https://www.getpostman.com/“ and download Postman in oder to run tests for GET, POST, PUT, DELETE from data in SQLite
+### Mocha
+1. npm install mocha to install Mocha.
+
+### Chai
+1. npm install chai to install chai.
 
 ## Using the CLI
 
