@@ -2,6 +2,7 @@
 
 const prompt = require('prompt');
 const { addNewProduct } = require('../models/Product');
+const { removeSingleProduct } = require('../models/Product');
 
 // Josh: PROMPTS FOR NEW PRODUCT
 module.exports.promptNewProduct = (req, res, next) => {
@@ -36,4 +37,9 @@ module.exports.promptNewProduct = (req, res, next) => {
 //Josh: FROM MODEL, ADDS PROD TO DB
 module.exports.addProduct = (data) => {
   addNewProduct(data);
+}
+
+//Bobby: FROM MODEL, REMOVES PRODUCT FROM ACTIVE USER DB
+module.exports.removeProduct = (data) => {
+  removeSingleProduct(data);
 }

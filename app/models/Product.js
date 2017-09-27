@@ -34,3 +34,10 @@ module.exports.getAllProducts = () => {
     });
   });
 };
+
+//Bobby: User completely removes a product from the system whole system, not just an order
+module.exports.removeSingleProduct = () => {
+  return new Promise( (resolve, reject) => {
+    db.run('')
+  });
+};
