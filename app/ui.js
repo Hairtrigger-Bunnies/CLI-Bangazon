@@ -19,7 +19,7 @@ const {
   promptActiveCustomer,
   getActive
 } = require("./controllers/activeCustomerCtrl");
-const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
+const { promptNewProduct, addProduct, promptUpdateProduct } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 
 // app models
