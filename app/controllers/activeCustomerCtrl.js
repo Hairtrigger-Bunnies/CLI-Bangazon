@@ -22,13 +22,16 @@ module.exports.promptActiveCustomer = () => {
       prompt.get(
         [
           {
-            name: "name",
+            name: "id",
             description: "Choose customer to set active",
             type: "string",
             required: true
           }
         ],
-        setActiveCustomer
+        function(err, data) {
+          if (err) return reject (err)
+          resolve(data);
+        }
       );
       //Josh: ^SETS ACTIVE CUSTOMER TO ID OF SELECTED FROM MODEL
     });
