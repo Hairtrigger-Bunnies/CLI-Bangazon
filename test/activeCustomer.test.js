@@ -1,5 +1,5 @@
 const { assert: {equal, isFunction, isNumber, deepEqual, isObject, isArray, assert} } = require('chai');
-const { setActiveCustomer, getActiveCustomer } = require('../app/models/activeCustomer');
+const { setActiveCustomer, getActiveCustomer } = require('../app/models/ActiveCustomer');
 const { promptActiveCustomer } = require('../app/controllers/activeCustomerCtrl');
 
 
