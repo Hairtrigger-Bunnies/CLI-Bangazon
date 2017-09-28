@@ -13,8 +13,6 @@ let activeCustomer;
 module.exports.setActiveCustomer = (userInput) => {
   console.log('userinput', userInput);
   activeCustomer = userInput.id;
-  // const { displayWelcome } = require('../ui');
-  // displayWelcome();
 }
 
 module.exports.getActiveCustomer = () => {

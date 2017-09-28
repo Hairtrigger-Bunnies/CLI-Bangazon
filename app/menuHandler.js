@@ -11,7 +11,6 @@ const sqlite3 = require("sqlite3").verbose();
 const dbPath = path.resolve(__dirname, "..", "db", "bangazon.sqlite");
 const db = new sqlite3.Database(dbPath);
 
-//Displ welcome
 
 // app Ctrls
 const { promptNewCustomer } = require("./controllers/customerCtrl");
