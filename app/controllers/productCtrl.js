@@ -3,7 +3,7 @@
 const prompt = require('prompt');
 const { addNewProduct } = require('../models/Product');
 const { getActiveCustomer } = require('../models/ActiveCustomer');
-const { removeSingleProduct } = require('../models/Product');
+const { getAllProducts, removeSingleProduct } = require('../models/Product');
 
 // Josh: PROMPTS FOR NEW PRODUCT
 module.exports.promptNewProduct = (req, res, next) => {
@@ -43,6 +43,27 @@ module.exports.addProduct = (data) => {
 }
 
 //Bobby: FROM MODEL, REMOVES PRODUCT FROM ACTIVE USER DB
-module.exports.removeProduct = (data) => {
-  removeSingleProduct(data);
-}
+module.exports.promptRemoveSingleProduct = (userInput) => {
+  return new Promise( (resolve, reject) => {
+    getAllProducts().then(data => {
+      for (let i = 0; i < data.length; i++) {
+        console.log(`${magenta(i + 1 + ".")} ${data[i].title}`)
+      }
+      console.log("");
+      prompt.get(
+        [
+          {
+            name: "id",
+            description: "Select a product to remove from the system",
+            type: "string",
+            required: true
+          }
+        ],
+        function(err, data) {
+          if (err) return reject (err)
+          resolve(data)
+        }
+      );
+    })
+  })
+};

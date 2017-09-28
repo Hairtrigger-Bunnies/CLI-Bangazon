@@ -35,8 +35,8 @@ module.exports.getAllProducts = () => {
 };
 
 //Bobby: User completely removes a product from the system whole system, not just an order
-module.exports.removeSingleProduct = () => {
+module.exports.removeProduct = (customerInput) => {
   return new Promise( (resolve, reject) => {
-    db.run('')
+    db.run('DELETE FROM Products WHERE ProductID = `${customerInput}`')
   });
 };
