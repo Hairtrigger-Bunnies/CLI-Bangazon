@@ -19,6 +19,7 @@ module.exports.promptCompleteOrder = () => {
           console.log(`  ${magenta(i+1+'.')} ${data[i].payment_type} ${data[i].account_number}`)
         }
         console.log('');
+        //Josh: WILL NEED TO CHOOSE CORRECT PAYMENT ID. EX 1 FOR CUSTOMER 1 WILL BE DIFFERENT THAN 1 FOR CUSTOMER 2. WHEN ADDING PAYTYPE TO ORDER IT WILL SELECT WRONG PAYTYPE 
         prompt.get([{
           name: 'name',
           description: 'Choose type of payment',

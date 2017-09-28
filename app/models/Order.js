@@ -39,9 +39,8 @@ module.exports.addOrderProduct = (data) => {
 module.exports.addPaymentTypeToOrder = (data) => {
 	let customer_id = getActiveCustomer();
 	return new Promise( (resolve, reject) => {
-		db.run(`INSERT INTO Orders (payment_type_id) VALUES (
-			${data.name}
-		)
-		WHERE Orders.customer_id = ${customer_id} and payment_type_id = null`)
+		db.run(`UPDATE Orders 
+						SET payment_type_id = ${data.name}
+						WHERE payment_type_id is null and customer_id = ${customer_id}`)
 	})
 }
