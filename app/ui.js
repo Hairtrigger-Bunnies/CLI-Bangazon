@@ -16,7 +16,7 @@ const db = new sqlite3.Database(dbPath);
 const { promptNewCustomer } = require("./controllers/customerCtrl");
 const { promptCompleteOrder } = require("./controllers/orderCtrl");
 const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
-const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
+const { promptNewProduct, addProduct, promptUpdateProduct } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 const { setActiveCustomer } = require('./models/ActiveCustomer');
 
@@ -68,6 +68,13 @@ let mainMenuHandler = (err, userInput) => {
     promptCompleteOrder().then(orderData => {
       console.log("order data to save", orderData);
       module.exports.displayWelcome();            
+    });
+  }
+  if (userInput.choice == '8') {
+    // AH & JT CALLS PROMPTS FROM PRODUCTSCTRL
+    promptUpdateProduct().then(productData => {
+      console.log('select a product to update', productData);
+      module.exports.displayWelcome();
     });
   }
 };

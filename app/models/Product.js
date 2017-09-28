@@ -33,3 +33,21 @@ module.exports.getAllProducts = () => {
     });
   });
 };
+
+module.exports.getCustomerProducts = () => {
+  return new Promise( (resolve, reject) => {
+    db.all('SELECT * FROM Products WHERE customer_id = 9', (err, Data) => {
+      if (err) return reject(err);
+      resolve(Data);
+    });
+  });
+};
+
+module.exports.getSingleProduct = () => {
+  return new Promise( (resolve, reject) => {
+    db.get('SELECT * FROM Products WHERE ProductId = 1', (err, Data) => {
+      if (err) return reject(err);
+      resolve(Data);
+    });
+  });
+};
