@@ -15,10 +15,13 @@ const db = new sqlite3.Database(dbPath);
 // app Ctrls
 const { promptNewCustomer } = require("./controllers/customerCtrl");
 const { promptCompleteOrder } = require("./controllers/orderCtrl");
-const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
+const {
+  promptActiveCustomer,
+  getActive
+} = require("./controllers/activeCustomerCtrl");
 const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
-const { setActiveCustomer } = require('./models/ActiveCustomer');
+const { setActiveCustomer } = require("./models/ActiveCustomer");
 
 // app models
 const { createNewCustomer, getCustRevenue } = require("./models/Customer");
@@ -34,7 +37,7 @@ let mainMenuHandler = (err, userInput) => {
       createNewCustomer(custData);
       console.log("customer data to save", custData);
       //save customer to db
-      module.exports.displayWelcome();            
+      module.exports.displayWelcome();
     });
   }
   //Josh: SELECT CUSTOMER TO SET ACTIVE
@@ -52,7 +55,7 @@ let mainMenuHandler = (err, userInput) => {
       console.log("Payment option to save", payData);
       //Josh: CALLS CONTROLLER FUNC TO ADD DATA TO DB
       addPayment(payData);
-      module.exports.displayWelcome();      
+      module.exports.displayWelcome();
     });
   }
   if (userInput.choice == "4") {
@@ -67,12 +70,15 @@ let mainMenuHandler = (err, userInput) => {
     //Josh: CALLS PROMPTS FROM ORDERCTRL
     promptCompleteOrder().then(orderData => {
       console.log("order data to save", orderData);
-      module.exports.displayWelcome();            
+      module.exports.displayWelcome();
     });
   }
   if (userInput.choice == "10")
     //(DR) calls getCustRevenue from customer model
-    getCustRevenue();
+    getCustRevenue().then(Data => {
+      console.log("Data", Data);
+      module.exports.displayWelcome();
+    });
 };
 
 const displayWelcome = () => {
