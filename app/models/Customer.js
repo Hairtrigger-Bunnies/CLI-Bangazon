@@ -46,7 +46,7 @@ module.exports.getCustomers = () => {
   });
 };
 
-// (DR) function getCustRevenue is bringing back the revenue associated with the customer_id when logged in thru the prompt
+// (DR) function getCustRevenue is bringing back the revenue associated with the customer_id when you choose an active customer in the prompt
 module.exports.getCustRevenue = () => {
   return new Promise((resolve, reject) => {
     // (DR) Using getActiveCustomer to grab the customer_id
