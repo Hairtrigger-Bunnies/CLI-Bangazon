@@ -4,6 +4,8 @@ const prompt = require('prompt');
 const { addNewProduct } = require('../models/Product');
 const { getActiveCustomer } = require('../models/ActiveCustomer');
 const { getAllProducts, removeSingleProduct } = require('../models/Product');
+const {red, magenta, blue} = require("chalk");
+const colors = require("colors/safe");
 
 // Josh: PROMPTS FOR NEW PRODUCT
 module.exports.promptNewProduct = (req, res, next) => {
