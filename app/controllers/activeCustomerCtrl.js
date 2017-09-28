@@ -1,10 +1,8 @@
 "use strict";
 
-const {
-  setActiveCustomer,
-  getActiveCustomer
-} = require("../models/ActiveCustomer");
-const { getCustomers } = require("../models/Customer");
+const { setActiveCustomer, getActiveCustomer } = require('../models/ActiveCustomer');
+const { getCustomers } = require('../models/Customer');
+
 
 const prompt = require("prompt");
 const { red, magenta, blue } = require("chalk");
@@ -24,13 +22,16 @@ module.exports.promptActiveCustomer = () => {
       prompt.get(
         [
           {
-            name: "name",
+            name: "id",
             description: "Choose customer to set active",
             type: "string",
             required: true
           }
         ],
-        setActiveCustomer
+        function(err, data) {
+          if (err) return reject (err)
+          resolve(data);
+        }
       );
       //Josh: ^SETS ACTIVE CUSTOMER TO ID OF SELECTED FROM MODEL
     });

@@ -1,6 +1,5 @@
 'use strict';
 const { Database } = require('sqlite3').verbose();
-const { setActiveCustomer, getActiveCustomer } = require('./ActiveCustomer');
 
 const path = require('path');
 const sqlite3 = require("sqlite3").verbose();
@@ -15,7 +14,7 @@ module.exports.addNewPaymentType = data => {
       `INSERT INTO Payment_Types (payment_type, account_number, customer_id) VALUES (
       '${data.type}', 
       '${data.accountNum}',
-      '1')`,
+      '${data.customer_id}')`,
       //Josh: NEED TO INSERT ACTIVECUSTOMERID ^
       (err, Data) => {
         if (err) return reject(err);

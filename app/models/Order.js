@@ -1,6 +1,5 @@
 'use strict';
 const { Database } = require('sqlite3').verbose();
-const { setActiveCustomer, getActiveCustomer } = require('./ActiveCustomer');
 
 const path = require('path');
 const sqlite3 = require("sqlite3").verbose();
