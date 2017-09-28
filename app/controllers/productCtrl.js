@@ -46,16 +46,19 @@ module.exports.addProduct = (data) => {
 
 //Bobby: FROM MODEL, REMOVES PRODUCT FROM ACTIVE USER DB
 module.exports.promptGetActiveUserProducts = (userInput) => {
+  let productRemoveArray = [];
   return new Promise( (resolve, reject) => {
     getActiveProducts().then(data => {
       for (let i = 0; i < data.length; i++) {
+        data[i].removeProductID = i + 1;
+        productRemoveArray.push(data[i]);
         console.log(`${magenta(i + 1 + ".")} ${data[i].title}`)
       }
       console.log("");
       prompt.get(
         [
           {
-            name: "id",
+            name: "name",
             description: "Select a product to remove from the system",
             type: "string",
             required: true
@@ -63,7 +66,9 @@ module.exports.promptGetActiveUserProducts = (userInput) => {
         ],
         function(err, data) {
           if (err) return reject (err)
-          resolve(data)
+          resolve(data);
+          let object = productRemoveArray[parseInt(`${data.name}` - 1)];
+          removeProduct(object);
         }
       );
     })
