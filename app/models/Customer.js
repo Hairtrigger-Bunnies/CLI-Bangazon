@@ -46,8 +46,26 @@ module.exports.getCustomers = () => {
   });
 };
 
-// module.exports.getCustRevenue = () => {
-//   return new Promise((resolve, reject) => {
-//     db.get(`SELECT `)
-//   })
-// }
+// (DR) function getCustRevenue is bringing back the revenue associated with the customer_id when logged in thru the prompt
+module.exports.getCustRevenue = () => {
+  return new Promise((resolve, reject) => {
+    // (DR) Using getActiveCustomer to grab the customer_id
+    let customer_id = getActiveCustomer();
+    db.all(
+      `select op.orderProductId, p.title, o.customer_id,
+    count(p.title) as Quantity,
+    sum(p.price) as Revenue
+    from products p	
+    left join Order_Products op
+    on p.productId = op.productId
+    left join orders o
+    on o.orderId = op.orderId
+      WHERE o.customer_id = "${customer_id}"
+	GROUP by op.productId `,
+      (err, Data) => {
+        if (err) return reject(err);
+        resolve(Data);
+      }
+    );
+  });
+};

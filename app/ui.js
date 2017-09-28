@@ -23,7 +23,7 @@ const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 
 // app models
-const { createNewCustomer } = require("./models/Customer");
+const { createNewCustomer, getCustRevenue } = require("./models/Customer");
 
 prompt.start();
 
@@ -64,7 +64,9 @@ let mainMenuHandler = (err, userInput) => {
       console.log("order data to save", orderData);
     });
   }
-  // if (userInput.choice == "10")
+  if (userInput.choice == "10")
+    //(DR) calls getCustRevenue from customer model
+    getCustRevenue();
 };
 
 const displayWelcome = () => {

@@ -3,7 +3,7 @@ const { createNewCustomer } = require("../app/models/Customer");
 const { promptNewCustomer } = require("../app/controllers/customerCtrl");
 // customer model test
 
-// createNewFunction is a function (DR)
+// createNewCustomer is a function (DR)
 describe("Customer Model", () => {
   describe("createNewCustomer creates customer", () => {
     it("should exist", () => {
@@ -16,6 +16,16 @@ describe("Customer Model", () => {
     it("promise is resolved", function() {
       getCustomers().then(Data => {
         isArray(Data);
+      });
+      // getCustRevenue is a function (DR)
+      it("should be a function", () => {
+        isFunction(getCustRevenue);
+      });
+      // insures the promise is resolved and is an array (DR)
+      it("promise resolved", function() {
+        getCustRevenue().then(Data => {
+          isArray(Data);
+        });
       });
     });
   });
