@@ -16,7 +16,7 @@ const db = new sqlite3.Database(dbPath);
 const { promptNewCustomer } = require("./controllers/customerCtrl");
 const { promptCompleteOrder } = require("./controllers/orderCtrl");
 const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
-const { promptNewProduct, addProduct, promptRemoveSingleProduct } = require("./controllers/productCtrl");
+const { promptNewProduct, addProduct, promptGetActiveUserProducts } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 const { setActiveCustomer } = require("./models/ActiveCustomer");
 
@@ -73,7 +73,7 @@ let mainMenuHandler = (err, userInput) => {
 
   if (userInput.choice == "7") {
     //Bobby: Removes a product from the system
-    promptRemoveSingleProduct(userInput.choice).then(prodData => {
+    promptGetActiveUserProducts(userInput.choice).then(prodData => {
       console.log("Remove product from the system", prodData);
       module.exports.displayWelcome();
     });
