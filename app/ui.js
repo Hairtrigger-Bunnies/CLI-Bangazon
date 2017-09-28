@@ -73,8 +73,7 @@ let mainMenuHandler = (err, userInput) => {
   if (userInput.choice == '8') {
     // AH & JT CALLS PROMPTS FROM PRODUCTSCTRL
     promptUpdateProduct().then(productData => {
-      console.log('select a product to update', productData);
-      module.exports.displayWelcome();
+
     });
   }
 };

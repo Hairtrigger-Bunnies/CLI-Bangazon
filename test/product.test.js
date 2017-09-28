@@ -1,5 +1,6 @@
 const { assert: {equal, isFunction, isNumber, deepEqual, isObject, isArray, exists, done } } = require('chai');
-const { addNewProduct, getSingleProduct } = require('../app/models/Product');
+const { addNewProduct, getSingleProduct, getCustomerProducts } = require('../app/models/Product');
+const { promptUpdateProduct } = require('../app/controllers/productCtrl');
 
 
 //Tests for the activeCustomer model
@@ -8,7 +9,7 @@ describe('addSingleProduct', () => {
   it('should be a function', () => {
     isFunction(addNewProduct);
   });
-
+  
   // it('should be a function', () => {
   //   isFunction(getActiveCustomer);
   // });
@@ -41,3 +42,51 @@ describe('addSingleProduct', () => {
   // });
 
 });
+
+describe('getCustomerProducts', () => {
+
+  it('should be a function', () => {
+    isFunction(getCustomerProducts);
+  });
+
+  it('should be an object', () => {
+    getCustomerProducts()
+    .then( (data) => {
+        isObject(data);
+      })
+      .catch( (err) => {
+        console.log("error getting product info", err)
+      });
+    })
+  });
+
+  describe('promptUpdateProduct', () => {
+    
+    it('should be a function', () => {
+      isFunction(promptUpdateProduct);
+    });
+
+    it('should be an array', () => {
+      getCustomerProducts()
+      .then( (data) => {
+        isArray(data);
+      })
+      .catch( (err) => {
+        console.log("error getting data product info", err);
+      });
+    });
+
+  });
+
+  describe('getSingleProduct', () => {
+
+    it('should return an object', () => {
+      getSingleProduct()
+      .then( (data) => {
+        isObject(data);
+      })
+      .catch( (err) => {
+        console.log("error getting single product info", err);
+      });
+    });
+  });

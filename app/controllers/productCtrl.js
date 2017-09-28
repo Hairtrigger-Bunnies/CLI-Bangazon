@@ -76,9 +76,9 @@ module.exports.promptUpdateProduct = (data) => {
 };
 
 let getSelectedProduct = (prodObject) => {
-        console.log( `${blue(1 + ".")} ${prodObject.title}`);
-        console.log( `${blue(2 + ".")} ${prodObject.price}`);
-        console.log( `${blue(3 + ".")} ${prodObject.description}`);
+        console.log( `${magenta(1 + ".")} Title "${prodObject.title}"`);
+        console.log( `${magenta(2 + ".")} Price "${prodObject.price}"`);
+        console.log( `${magenta(3 + ".")} Description "${prodObject.description}"`);
       console.log("");
       prompt.get([
         {
@@ -91,8 +91,6 @@ let getSelectedProduct = (prodObject) => {
       function(err, data) {
         if (err) return reject (err)
         resolve(data);
-        console.log("resolved", data, "selection", productUpdateArray[parseInt(`${data.name}` - 1)]);
-        getSelectedProduct(productUpdateArray[parseInt(`${data.name}` - 1)]);
       }
   )
 }
