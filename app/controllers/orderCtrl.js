@@ -2,6 +2,9 @@
 
 const prompt = require('prompt');
 const { getAllPaymentTypes } = require('../models/PaymentType')
+const { getAllProducts } = require('../models/Product');
+const { addOrderProduct } = require('../models/Order');
+const { getActiveCustomer } = require('../models/ActiveCustomer');
 const {red, magenta, blue} = require("chalk");
 const colors = require("colors/safe");
 
@@ -26,7 +29,36 @@ module.exports.promptCompleteOrder = () => {
   });
 };
 
+module.exports.promptAddProductToOrder = () => {
+  return new Promise( (resolve, reject) => {
+    console.log('');
+    getAllProducts()
+    .then( (data) => {
+      for(let i = 0; i < data.length; i++) {
+        console.log(`  ${magenta(i+1+'.')} ${data[i].title} ${data[i].price} ${data[i].description}`)
+      }
+      console.log('');
+      prompt.get([{
+        name: 'name',
+        description: 'Choose product to add to order',
+        type: 'string',
+        required: true
+      }], function(err, results) {
+        if (err) return reject(err);
+        //Josh: ADDS ACTIVE CUSTOMER ID TO RESULTS
+        results.customer_id = getActiveCustomer();
+        resolve(results);
+      })
+    });
+  });
+};
+
 //Josh: DEPENDING ON WHICH INPUT, WILL PASS ALONG PAYTYPEID TO FUNCTION
 let paymentHandler = (err, userInput) => {
   console.log('you chose', userInput.name);
+}
+
+module.exports.addProductToOrder = (userInput) => {
+  console.log('you chose', userInput.name);
+  addOrderProduct(userInput);
 }

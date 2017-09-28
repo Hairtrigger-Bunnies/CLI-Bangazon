@@ -33,3 +33,14 @@ module.exports.getAllProducts = () => {
     });
   });
 };
+
+module.exports.addOrderProduct = (data) => {
+  return new Promise( (resolve, reject) => {
+    db.run(`INSERT INTO Order_Products (OrderID, ProductID) VALUES (
+      5, 
+      ${data.product_id})`, (err, data) => {
+    if (err) return reject(err);
+    resolve(data);
+    })
+  })
+};

@@ -14,7 +14,7 @@ const db = new sqlite3.Database(dbPath);
 
 // app Ctrls
 const { promptNewCustomer } = require("./controllers/customerCtrl");
-const { promptCompleteOrder } = require("./controllers/orderCtrl");
+const { promptCompleteOrder, promptAddProductToOrder, addProductToOrder } = require("./controllers/orderCtrl");
 const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
 const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
@@ -63,12 +63,25 @@ let mainMenuHandler = (err, userInput) => {
       module.exports.displayWelcome();
     });
   }
+  if (userInput.choice == "5") {
+    promptAddProductToOrder().then(prodData => {
+      console.log("choose product to add to order", prodData);
+      //Josh: BRINGS IN PROMPT DATA TO ADD TO DB
+      addProductToOrder(prodData);
+      module.exports.displayWelcome();
+    });
+  }
   if (userInput.choice == "6") {
     //Josh: CALLS PROMPTS FROM ORDERCTRL
     promptCompleteOrder().then(orderData => {
       console.log("order data to save", orderData);
       module.exports.displayWelcome();            
     });
+  }
+  else {
+    //Josh: FORCES USER TO SELECT AVAILABLE NUMBER
+    module.exports.displayWelcome();
+    console.log("Please select a number");    
   }
 };
 

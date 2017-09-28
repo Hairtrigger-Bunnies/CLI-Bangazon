@@ -20,3 +20,14 @@ module.exports.getOrder = (data) => {
 	// 	});
   // });
 };
+
+module.exports.addOrderProduct = (data) => {
+  return new Promise( (resolve, reject) => {
+    db.run(`INSERT INTO Order_Products (OrderID, ProductID) VALUES (
+      5, 
+      ${data.name})`, (err, data) => {
+    if (err) return reject(err);
+    resolve(data);
+    })
+  })
+};
