@@ -45,7 +45,7 @@ module.exports.addProduct = (data) => {
   addNewProduct(data);
 }
 
-//Bobby: FROM MODEL, REMOVES PRODUCT FROM ACTIVE USER DB
+//Bobby: FROM MODEL, FETCHES PRODUCT FROM ACTIVE USER DB AND DISPLAYS THE ONES NOT LINKED TO A PRODUCT ORDER
 module.exports.promptGetActiveUserProducts = (userInput) => {
   let productRemoveArray = [];
   return new Promise( (resolve, reject) => {
@@ -69,6 +69,7 @@ module.exports.promptGetActiveUserProducts = (userInput) => {
           if (err) return reject (err)
           resolve(data);
           let object = productRemoveArray[parseInt(`${data.name}` - 1)];
+          //Bobby: CALLS FUNCTION THAT DELETES A PRODUCT FROM HE ACTIVE USERS DB NOT LINKED TO AN ORDER
           removeProduct(object);
         }
       );
