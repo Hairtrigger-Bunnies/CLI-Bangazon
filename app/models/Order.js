@@ -6,7 +6,9 @@ const sqlite3 = require("sqlite3").verbose();
 const dbPath = path.resolve(__dirname, '..', '..', 'db', 'bangazon.sqlite');
 const db = new sqlite3.Database(dbPath);
 
-// Josh: WHEN VIEWING ORDER THIS WILL BE CALLED. WILL JOIN PAYTYPE ETC TO ORDER
+const { getActiveCustomer } = require('./ActiveCustomer');
+
+// Josh: WILL CREATE ORDER WHEN ADDING A PRODUCT. WILL LATER CHECK IF ORDER EXISTS WHEN ADDING  MORE PRODUCTS
 module.exports.getOrder = (data) => {
   console.log('data?', data);
   // return new Promise( (resolve, reject) => {
@@ -20,3 +22,26 @@ module.exports.getOrder = (data) => {
 	// 	});
   // });
 };
+
+module.exports.addOrderProduct = (data) => {
+  return new Promise( (resolve, reject) => {
+		//Josh: WILL NEED TO SET ORDER ID TO EQUAL ACTUAL ORDERID
+    db.run(`INSERT INTO Order_Products (OrderID, ProductID) VALUES (
+      5, 
+      ${data.name})`, (err, data) => {
+    if (err) return reject(err);
+    resolve(data);
+    })
+  })
+};
+
+//Josh: THIS FUNCTION INSERTS CHOSEN PAYMENT TYPE TO ORDER
+module.exports.addPaymentTypeToOrder = (data) => {
+	let customer_id = getActiveCustomer();
+	return new Promise( (resolve, reject) => {
+		db.run(`INSERT INTO Orders (payment_type_id) VALUES (
+			${data.name}
+		)
+		WHERE Orders.customer_id = ${customer_id} and payment_type_id = null`)
+	})
+}

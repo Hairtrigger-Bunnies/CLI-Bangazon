@@ -93,7 +93,7 @@ db.serialize(function() {
 
   orders.forEach(({ order_date, payment_type_id, customer_id }) => {
     db.run(`INSERT INTO Orders (order_date, payment_type_id, customer_id) 
-                VALUES ("${order_date}", ${payment_type_id}, "${customer_id}")`);
+                VALUES ("${order_date}", null, "${customer_id}")`);
   });
 
   customers.forEach(
