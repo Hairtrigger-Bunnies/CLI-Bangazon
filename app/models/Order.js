@@ -8,7 +8,7 @@ const db = new sqlite3.Database(dbPath);
 
 const { getActiveCustomer } = require('./ActiveCustomer');
 
-// Josh: WHEN VIEWING ORDER THIS WILL BE CALLED. WILL JOIN PAYTYPE ETC TO ORDER
+// Josh: WILL CREATE ORDER WHEN ADDING A PRODUCT. WILL LATER CHECK IF ORDER EXISTS WHEN ADDING  MORE PRODUCTS
 module.exports.getOrder = (data) => {
   console.log('data?', data);
   // return new Promise( (resolve, reject) => {

@@ -16,7 +16,7 @@ const db = new sqlite3.Database(dbPath);
 const { promptNewCustomer } = require("./controllers/customerCtrl");
 const { promptCompleteOrder, promptAddProductToOrder, addProductToOrder, paymentHandler } = require("./controllers/orderCtrl");
 const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
-const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
+const { promptNewProduct, addProduct, promptGetActiveUserProducts } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 const { setActiveCustomer } = require("./models/ActiveCustomer");
 
@@ -81,6 +81,14 @@ module.exports.mainMenuHandler = (err, userInput) => {
     promptCompleteOrder().then(orderData => {
       console.log("order data to save", orderData);
       paymentHandler(orderData);
+      const { displayWelcome } = require('./ui');
+      displayWelcome();
+    });
+  }
+  else if (userInput.choice == "7") {
+    //Bobby: Removes a product from the system
+    promptGetActiveUserProducts(userInput.choice).then(prodData => {
+      console.log("Remove product from the system", prodData);
       const { displayWelcome } = require('./ui');
       displayWelcome();
     });

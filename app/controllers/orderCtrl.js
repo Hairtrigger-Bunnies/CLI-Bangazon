@@ -34,6 +34,7 @@ module.exports.promptCompleteOrder = () => {
   });
 };
 
+//Josh: THIS SHOWS PRODUCTS TO SELECT AND ADDS TO ORDER. WILL CHECK FOR EXISTING ORDER. LATER, WILL ALLOW SELECT MULTIPLE
 module.exports.promptAddProductToOrder = () => {
   return new Promise( (resolve, reject) => {
     console.log('');
@@ -64,6 +65,7 @@ module.exports.paymentHandler = (userInput) => {
   addPaymentTypeToOrder(userInput);
 }
 
+//Josh: ADDS PRODUCT
 module.exports.addProductToOrder = (userInput) => {
   console.log('you chose', userInput.name);
   addOrderProduct(userInput);
