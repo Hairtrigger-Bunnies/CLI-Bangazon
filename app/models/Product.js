@@ -40,3 +40,15 @@ module.exports.removeProduct = (customerInput) => {
     db.run('DELETE FROM Products WHERE ProductID = `${customerInput}`')
   });
 };
+
+module.exports.getActiveProducts = () => {
+  return new Promise((resolve, reject) => {
+    db.all(`SELECT * FROM Products 
+            LEFT OUTER JOIN Order_Products ON Products.ProductID = Order_Products.ProductID
+            WHERE customer_id = "5" AND Order_Products.OrderProductID IS NULL;`, 
+        (err, Data) => {
+      if (err) return reject(err);
+      resolve(Data);
+    });
+  });
+};

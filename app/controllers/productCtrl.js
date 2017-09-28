@@ -3,7 +3,7 @@
 const prompt = require('prompt');
 const { addNewProduct } = require('../models/Product');
 const { getActiveCustomer } = require('../models/ActiveCustomer');
-const { getAllProducts, removeSingleProduct } = require('../models/Product');
+const { getAllProducts, removeSingleProduct, getActiveProducts } = require('../models/Product');
 const {red, magenta, blue} = require("chalk");
 const colors = require("colors/safe");
 
@@ -45,9 +45,9 @@ module.exports.addProduct = (data) => {
 }
 
 //Bobby: FROM MODEL, REMOVES PRODUCT FROM ACTIVE USER DB
-module.exports.promptRemoveSingleProduct = (userInput) => {
+module.exports.promptGetActiveUserProducts = (userInput) => {
   return new Promise( (resolve, reject) => {
-    getAllProducts().then(data => {
+    getActiveProducts().then(data => {
       for (let i = 0; i < data.length; i++) {
         console.log(`${magenta(i + 1 + ".")} ${data[i].title}`)
       }
