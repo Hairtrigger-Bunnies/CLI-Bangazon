@@ -15,16 +15,8 @@ const db = new sqlite3.Database(dbPath);
 // app Ctrls
 const { promptNewCustomer } = require("./controllers/customerCtrl");
 const { promptCompleteOrder } = require("./controllers/orderCtrl");
-<<<<<<< HEAD
 const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
 const { promptNewProduct, addProduct, promptRemoveSingleProduct } = require("./controllers/productCtrl");
-=======
-const {
-  promptActiveCustomer,
-  getActive
-} = require("./controllers/activeCustomerCtrl");
-const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
->>>>>>> master
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 const { setActiveCustomer } = require("./models/ActiveCustomer");
 
