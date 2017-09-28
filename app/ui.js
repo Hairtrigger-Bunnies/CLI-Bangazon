@@ -15,13 +15,21 @@ const db = new sqlite3.Database(dbPath);
 // app Ctrls
 const { promptNewCustomer } = require("./controllers/customerCtrl");
 const { promptCompleteOrder } = require("./controllers/orderCtrl");
+<<<<<<< HEAD
 const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
 const { promptNewProduct, addProduct, promptRemoveSingleProduct } = require("./controllers/productCtrl");
+=======
+const {
+  promptActiveCustomer,
+  getActive
+} = require("./controllers/activeCustomerCtrl");
+const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
+>>>>>>> master
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
-const { setActiveCustomer } = require('./models/ActiveCustomer');
+const { setActiveCustomer } = require("./models/ActiveCustomer");
 
 // app models
-const { createNewCustomer } = require("./models/Customer");
+const { createNewCustomer, getCustRevenue } = require("./models/Customer");
 
 prompt.start();
 
@@ -34,7 +42,7 @@ let mainMenuHandler = (err, userInput) => {
       createNewCustomer(custData);
       console.log("customer data to save", custData);
       //save customer to db
-      module.exports.displayWelcome();            
+      module.exports.displayWelcome();
     });
   }
   //Josh: SELECT CUSTOMER TO SET ACTIVE
@@ -52,7 +60,7 @@ let mainMenuHandler = (err, userInput) => {
       console.log("Payment option to save", payData);
       //Josh: CALLS CONTROLLER FUNC TO ADD DATA TO DB
       addPayment(payData);
-      module.exports.displayWelcome();      
+      module.exports.displayWelcome();
     });
   }
   if (userInput.choice == "4") {
@@ -67,9 +75,10 @@ let mainMenuHandler = (err, userInput) => {
     //Josh: CALLS PROMPTS FROM ORDERCTRL
     promptCompleteOrder().then(orderData => {
       console.log("order data to save", orderData);
-      module.exports.displayWelcome();            
+      module.exports.displayWelcome();
     });
   }
+
   if (userInput.choice == "7") {
     //Bobby: Removes a product from the system
     promptRemoveSingleProduct(userInput.choice).then(prodData => {
@@ -77,6 +86,13 @@ let mainMenuHandler = (err, userInput) => {
       module.exports.displayWelcome();
     });
   }
+
+  if (userInput.choice == "10")
+    //(DR) calls getCustRevenue from customer model
+    getCustRevenue().then(Data => {
+      console.log("Data", Data);
+      module.exports.displayWelcome();
+    });
 
 };
 
