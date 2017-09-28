@@ -36,14 +36,18 @@ module.exports.getAllProducts = () => {
 
 //Bobby: User completely removes a product from the system whole system, not just an order
 module.exports.removeProduct = (customerInput) => {
+  console.log("customerInput", customerInput);
   return new Promise( (resolve, reject) => {
-    db.run('DELETE FROM Products WHERE ProductID = `${customerInput}`')
+    db.run(`DELETE FROM Products WHERE ProductID = ${customerInput.ProductID}`, (err, data) => {
+      if (err) return reject(err);
+      resolve(data);
+    });
   });
 };
 
 module.exports.getActiveProducts = () => {
   return new Promise((resolve, reject) => {
-    db.all(`SELECT * FROM Products 
+    db.all(`SELECT Products.ProductID, Products.title, Products.price, Products.description, Products.customer_id FROM Products 
             LEFT OUTER JOIN Order_Products ON Products.ProductID = Order_Products.ProductID
             WHERE customer_id = "5" AND Order_Products.OrderProductID IS NULL;`, 
         (err, Data) => {
