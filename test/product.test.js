@@ -1,6 +1,12 @@
 const { assert: {equal, isFunction, isNumber, deepEqual, isObject, isArray, exists, done } } = require('chai');
-const { addNewProduct, getSingleProduct } = require('../app/models/Product');
+const { addNewProduct, getSingleProduct, removeProduct, getActiveProducts } = require('../app/models/Product');
 
+// Bobby- tests for getting active customer product list
+describe('removeProduct', () => {
+  it('should be a function', () => {
+    isFunction(removeProduct);
+  });
+})
 
 //Tests for the activeCustomer model
 describe('addSingleProduct', () => {
@@ -46,5 +52,4 @@ describe('addSingleProduct', () => {
   //     isFunction(removeItem);
   //   });
   // });
-
 });
