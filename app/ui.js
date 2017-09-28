@@ -12,84 +12,9 @@ const sqlite3 = require("sqlite3").verbose();
 const dbPath = path.resolve(__dirname, "..", "db", "bangazon.sqlite");
 const db = new sqlite3.Database(dbPath);
 
-// app Ctrls
-const { promptNewCustomer } = require("./controllers/customerCtrl");
-const { promptCompleteOrder, promptAddProductToOrder, addProductToOrder } = require("./controllers/orderCtrl");
-const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
-const { promptNewProduct, addProduct } = require("./controllers/productCtrl");
-const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
-const { setActiveCustomer } = require("./models/ActiveCustomer");
-
-// app models
-const { createNewCustomer, getCustRevenue } = require("./models/Customer");
+const { mainMenuHandler } = require('./menuHandler');
 
 prompt.start();
-
-let mainMenuHandler = (err, userInput) => {
-  console.log("user input", userInput);
-  if (userInput.choice == "1") {
-    // calling promptNewCustomer when user inputs 1 (DR)
-    promptNewCustomer().then(custData => {
-      //calling createNewCustomer with custData passed into it (DR)
-      createNewCustomer(custData);
-      console.log("customer data to save", custData);
-      //save customer to db
-      module.exports.displayWelcome();
-    });
-  }
-  //Josh: SELECT CUSTOMER TO SET ACTIVE
-  if (userInput.choice == "2") {
-    promptActiveCustomer().then(custData => {
-      console.log("active customer", custData.id);
-      //Josh: SETS ACTIVE CUSTOMER BASED ON PROMPT
-      setActiveCustomer(custData);
-      module.exports.displayWelcome();
-    });
-  }
-  if (userInput.choice == "3") {
-    //Josh: CALLS PROMPTS FROM PAYMENTCTRL
-    promptNewPayment().then(payData => {
-      console.log("Payment option to save", payData);
-      //Josh: CALLS CONTROLLER FUNC TO ADD DATA TO DB
-      addPayment(payData);
-      module.exports.displayWelcome();
-    });
-  }
-  if (userInput.choice == "4") {
-    promptNewProduct().then(prodData => {
-      console.log("choose product to add", prodData);
-      //Josh: BRINGS IN PROMPT DATA TO ADD TO DB
-      addProduct(prodData);
-      module.exports.displayWelcome();
-    });
-  }
-  if (userInput.choice == "5") {
-    promptAddProductToOrder().then(prodData => {
-      console.log("choose product to add to order", prodData);
-      //Josh: BRINGS IN PROMPT DATA TO ADD TO DB
-      addProductToOrder(prodData);
-      module.exports.displayWelcome();
-    });
-  }
-  if (userInput.choice == "6") {
-    //Josh: CALLS PROMPTS FROM ORDERCTRL
-    promptCompleteOrder().then(orderData => {
-      console.log("order data to save", orderData);
-      module.exports.displayWelcome();
-    });
-  }
-  if (userInput.choice == "10")
-    //(DR) calls getCustRevenue from customer model
-    getCustRevenue().then(Data => {
-      console.log("Data", Data);
-      module.exports.displayWelcome();
-    });
-  else {
-    //Josh: FORCES USER TO SELECT AVAILABLE NUMBER
-    module.exports.displayWelcome();
-    console.log("Please select a number");    
-  }
-};
 
 const displayWelcome = () => {
   let headerDivider = `${magenta(

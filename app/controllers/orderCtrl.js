@@ -3,7 +3,7 @@
 const prompt = require('prompt');
 const { getAllPaymentTypes } = require('../models/PaymentType')
 const { getAllProducts } = require('../models/Product');
-const { addOrderProduct } = require('../models/Order');
+const { addOrderProduct, addPaymentTypeToOrder } = require('../models/Order');
 const { getActiveCustomer } = require('../models/ActiveCustomer');
 const {red, magenta, blue} = require("chalk");
 const colors = require("colors/safe");
@@ -24,8 +24,13 @@ module.exports.promptCompleteOrder = () => {
           description: 'Choose type of payment',
           type: 'string',
           required: true
-        }], paymentHandler );
-    })
+        }], function(err, results) {
+          if (err) return reject(err);
+          //Josh: ADDS ACTIVE CUSTOMER ID TO RESULTS
+          results.customer_id = getActiveCustomer();
+          resolve(results);
+      })
+    });
   });
 };
 
@@ -54,8 +59,9 @@ module.exports.promptAddProductToOrder = () => {
 };
 
 //Josh: DEPENDING ON WHICH INPUT, WILL PASS ALONG PAYTYPEID TO FUNCTION
-let paymentHandler = (err, userInput) => {
-  console.log('you chose', userInput.name);
+module.exports.paymentHandler = (userInput) => {
+  // console.log('you chose', userInput.name);
+  addPaymentTypeToOrder(userInput);
 }
 
 module.exports.addProductToOrder = (userInput) => {

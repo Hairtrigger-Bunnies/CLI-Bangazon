@@ -22,8 +22,6 @@ module.exports.promptActiveCustomer = () => {
       prompt.get(
         [
           {
-            pattern: /^[0-9]+$/,
-            message: 'Please enter a number',
             name: "id",
             description: "Choose customer to set active",
             type: "string",
