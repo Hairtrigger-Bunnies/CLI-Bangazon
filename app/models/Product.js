@@ -79,7 +79,7 @@ module.exports.getActiveProducts = () => {
     );
   });
 };
-
+// (DR/Bobby) getStaleProducts gets product not on an order 180 day old resolves data for manhandler
 module.exports.getStaleProducts = () => {
   return new Promise((resolve, reject) => {
     db.all(
