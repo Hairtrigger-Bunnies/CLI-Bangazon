@@ -1,11 +1,7 @@
 "use strict";
 
 const prompt = require("prompt");
-const {
-  addNewProduct,
-  getCustomerProducts,
-  getSingleProduct
-} = require("../models/Product");
+const { addNewProduct, getCustomerProducts } = require("../models/Product");
 const { getActiveCustomer } = require("../models/ActiveCustomer");
 const { red, magenta, blue } = require("chalk");
 const colors = require("colors/safe");
@@ -71,15 +67,9 @@ module.exports.promptGetActiveUserProducts = userInput => {
         [
           {
             name: "name",
-            description: "Select a product to update",
+            description: "Select a product to remove from the system",
             type: "string",
-            required: "true"
-          },
-          {
-            name: "title",
-            description: "Select a Title to update",
-            type: "string",
-            required: "true"
+            required: true
           }
         ],
         function(err, data) {
@@ -91,28 +81,5 @@ module.exports.promptGetActiveUserProducts = userInput => {
         }
       );
     });
-  });
-};
-
-let getSelectedProduct = prodObject => {
-  return new Promise((resolve, reject) => {
-    console.log(`${magenta(1 + ".")} Title "${prodObject.title}"`);
-    console.log(`${magenta(2 + ".")} Price "${prodObject.price}"`);
-    console.log(`${magenta(3 + ".")} Description "${prodObject.description}"`);
-    console.log("");
-    prompt.get(
-      [
-        {
-          name: "name",
-          description: "Select an option",
-          type: "string",
-          required: "true"
-        }
-      ],
-      function(err, data) {
-        if (err) return reject(err);
-        resolve(data);
-      }
-    );
   });
 };
