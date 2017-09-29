@@ -73,7 +73,7 @@ module.exports.getActiveProducts = () => {
   });
 };
 
-//Bobby and David: fetch products that have never been added to an order, and has been in the system for more than 180 days
+//David and Bobby: fetch products that have never been added to an order, and has been in the system for more than 180 days
 module.exports.getStaleProducts = () => {
   let dt = new Date();
   let now = d.toISOString();
