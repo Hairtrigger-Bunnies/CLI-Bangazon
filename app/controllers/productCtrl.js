@@ -26,6 +26,7 @@ module.exports.promptNewProduct = (req, res, next) => {
       type: 'string',
       required: true
     }, {
+      //Josh: WILL NEED TO DISPLAY PRODUCT TYPE NAMES SO USER KNOWS WHAT THEY ARE
       name: 'type',
       description: 'Enter product type',
       type: 'string',

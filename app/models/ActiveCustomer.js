@@ -17,6 +17,5 @@ module.exports.setActiveCustomer = (userInput) => {
 
 //Josh: CALL THIS TO GET CUSTOMERID VALUE
 module.exports.getActiveCustomer = () => {
-  console.log('active', activeCustomer);
   return activeCustomer
 };

@@ -15,7 +15,7 @@ module.exports.promptActiveCustomer = () => {
     getCustomers().then(data => {
       for (let i = 0; i < data.length; i++) {
         console.log(
-          `  ${magenta(i + 1 + ".")} ${data[i].first_name} ${data[i].last_name}`
+          `  ${magenta(data[i].CustomerID + ".")} ${data[i].first_name} ${data[i].last_name}`
         );
       }
       console.log("");
