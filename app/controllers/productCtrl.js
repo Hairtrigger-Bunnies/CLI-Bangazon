@@ -58,8 +58,8 @@ module.exports.promptGetActiveUserProducts = userInput => {
   return new Promise((resolve, reject) => {
     getActiveProducts().then(data => {
       for (let i = 0; i < data.length; i++) {
-        data[i].updateProductID = i + 1;
-        productUpdateArray.push(data[i]);
+        data[i].removeProductID = i + 1;
+        productRemoveArray.push(data[i]);
         console.log(`${magenta(i + 1 + ".")} ${data[i].title}`);
       }
       console.log("");
