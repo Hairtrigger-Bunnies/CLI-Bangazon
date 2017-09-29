@@ -35,7 +35,8 @@ db.serialize(function() {
       price INT,
       description TEXT,
       type_id INT,
-      customer_id INT)`);
+      customer_id INT,
+      quantity INT)`);
 
   db.run(`CREATE TABLE IF NOT EXISTS Payment_Types (
         PaymentTypeID INTEGER PRIMARY KEY, 
@@ -76,9 +77,9 @@ db.serialize(function() {
   });
 
   //INSERT DATA INTO TABLES
-  products.forEach(({ title, price, description, type_id, customer_id }) => {
-    db.run(`INSERT INTO Products (title, price, description, type_id, customer_id) 
-                VALUES ("${title}", "${price}", "${description}", "${type_id}", "${customer_id}")`);
+  products.forEach(({ title, price, description, type_id, customer_id, quantity }) => {
+    db.run(`INSERT INTO Products (title, price, description, type_id, customer_id, quantity) 
+                VALUES ("${title}", "${price}", "${description}", "${type_id}", "${customer_id}", "${quantity}")`);
   });
 
   product_types.forEach(({ name }) => {

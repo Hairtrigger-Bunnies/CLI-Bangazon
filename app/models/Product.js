@@ -76,19 +76,24 @@ module.exports.getActiveProducts = () => {
 //Jevon & Aspen: GETS THE ACTIVE CUSTOMER'S PRODUCTS
 module.exports.getCustomerProducts = () => {
   let customer_id = getActiveCustomer();
-  return new Promise( (resolve, reject) => {
-    db.all(`SELECT * FROM Products WHERE customer_id = ${customer_id}`, (err, Data) => {
-      if (err) return reject(err);
-      resolve(Data);
+  if ( customer_id !== undefined ) {
+    return new Promise( (resolve, reject) => {
+      db.all(`SELECT * FROM Products WHERE customer_id = ${customer_id}`, (err, Data) => {
+        if (err) return reject(err);
+        resolve(Data);
+      });
     });
-  });
+  } else {
+    const { displayWelcome } = require('../ui');
+    displayWelcome();
+  };
 };
 
 //Jevon & Aspen: PUTS THE UPDATED PRODUCT TO THE DATABASE
 module.exports.putUpdatedProduct = (product) => {
   return new Promise((resolve, reject) => {
     db.run(`UPDATE Products
-            SET title = "${product.title}", price = ${product.price}, description = "${product.description}"
+            SET title = "${product.title}", price = ${product.price}, description = "${product.description}", quantity = "${product.quantity}"
             WHERE ProductID = ${product.ProductID}`, 
         (err, Data) => {
       if (err) return reject(err);

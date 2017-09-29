@@ -116,8 +116,9 @@ let getSelectedProduct = (prodObject) => {
     console.log( `${magenta(1 + ".")} Title "${prodObject.title}"`);
     console.log( `${magenta(2 + ".")} Price "$${prodObject.price}"`);
     console.log( `${magenta(3 + ".")} Description "${prodObject.description}"`);
-    console.log( `${magenta(4 + ".")} Save`);
-    console.log( `${magenta(5 + ".")} Return to Main Menu`);
+    console.log( `${magenta(4 + ".")} Quantity "${prodObject.quantity}"`);
+    console.log( `${magenta(5 + ".")} Save`);
+    console.log( `${magenta(6 + ".")} Return to Main Menu`);
     console.log("");
     prompt.get([
       {
@@ -176,10 +177,25 @@ let getSelectedProduct = (prodObject) => {
             resolve(data);
         })
       } else if (data.title == "4") {
+        prompt.get([
+          {
+            name: "title",
+            description: `Change Quantity`,
+            type: "string",
+            required: "true"
+          }
+        ],
+        function(err, data) {
+          if (err) return reject (err)
+            object.quantity = data.title;
+          getSelectedProduct(object);
+            resolve(data);
+        })
+      } else if (data.title == "5") {
         putUpdatedProduct(object);
         const { displayWelcome } = require('../ui');
         displayWelcome();
-      } else if (data.title == "5") {
+      } else if (data.title == "6") {
         const { displayWelcome } = require('../ui');
         displayWelcome();
       } else {
