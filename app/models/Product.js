@@ -51,6 +51,7 @@ module.exports.addOrderProduct = data => {
   });
 };
 
+//Bobby: REMOVES PRODUCT FROM ACTIVE CUSTOMERS DATABASE THAT IS NOT IN A PRODUCT ORDER
 module.exports.removeProduct = customerInput => {
   return new Promise((resolve, reject) => {
     db.run(
@@ -63,6 +64,7 @@ module.exports.removeProduct = customerInput => {
   });
 };
 
+//Bobby: FETCHES AND DISPLAYS ALL ACTIVE CUSTOMER'S PRODUCSTS WHEN ENTERED
 module.exports.getActiveProducts = () => {
   let customer_id = getActiveCustomer();
   return new Promise((resolve, reject) => {

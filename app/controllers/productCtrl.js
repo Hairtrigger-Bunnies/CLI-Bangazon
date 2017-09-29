@@ -34,6 +34,7 @@ module.exports.promptNewProduct = (req, res, next) => {
           required: true
         },
         {
+          //Josh: WILL NEED TO DISPLAY PRODUCT TYPE NAMES SO USER KNOWS WHAT THEY ARE
           name: "type",
           description: "Enter product type",
           type: "string",
@@ -55,12 +56,11 @@ module.exports.addProduct = data => {
   addNewProduct(data);
 };
 
-// AH & JT: FROM MODEL, UPDATES PROD TO DB
-module.exports.promptUpdateProduct = data => {
-  let productUpdateArray = [];
-  // updateProduct(data);
+//Bobby: FROM MODEL, FETCHES PRODUCT FROM ACTIVE USER DB AND DISPLAYS THE ONES NOT LINKED TO A PRODUCT ORDER
+module.exports.promptGetActiveUserProducts = userInput => {
+  let productRemoveArray = [];
   return new Promise((resolve, reject) => {
-    getCustomerProducts().then(data => {
+    getActiveProducts().then(data => {
       for (let i = 0; i < data.length; i++) {
         data[i].updateProductID = i + 1;
         productUpdateArray.push(data[i]);
@@ -85,8 +85,9 @@ module.exports.promptUpdateProduct = data => {
         function(err, data) {
           if (err) return reject(err);
           resolve(data);
-          let object = productUpdateArray[parseInt(`${data.name}` - 1)];
-          getSelectedProduct(object);
+          let object = productRemoveArray[parseInt(`${data.name}` - 1)];
+          //Bobby: CALLS FUNCTION THAT DELETES A PRODUCT FROM HE ACTIVE USERS DB NOT LINKED TO AN ORDER
+          removeProduct(object);
         }
       );
     });
