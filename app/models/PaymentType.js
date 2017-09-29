@@ -6,6 +6,8 @@ const sqlite3 = require("sqlite3").verbose();
 const dbPath = path.resolve(__dirname, '..', '..', 'db', 'bangazon.sqlite');
 const db = new sqlite3.Database(dbPath);
 
+const { getActiveCustomer } = require('./ActiveCustomer');
+
 //Josh: TAKES VALUES FROM PAYTYPECTRL AND INSERTS TO DB
 module.exports.addNewPaymentType = data => {
   console.log('data?', data);
@@ -27,7 +29,8 @@ module.exports.addNewPaymentType = data => {
 //Josh: TO DUSPLAY ALL PAYTYPES. CALLED FROM ORDERCTRL WHEN SELECTING WHICH PAYTYPE TO USE
 module.exports.getAllPaymentTypes = () => {
   return new Promise((resolve, reject) => {
-    db.all(`SELECT * FROM Payment_Types`, (err, Data) => {
+    let customer_id = getActiveCustomer();
+    db.all(`SELECT * FROM Payment_Types WHERE customer_id = ${customer_id}`, (err, Data) => {
       if (err) return reject(err);
       resolve(Data);
     });

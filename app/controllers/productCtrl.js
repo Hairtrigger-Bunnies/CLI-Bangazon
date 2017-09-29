@@ -1,7 +1,7 @@
 'use strict';
 
 const prompt = require('prompt');
-const { addNewProduct, getCustomerProducts, getSingleProduct, putUpdatedProduct } = require('../models/Product');
+const { getAllProducts, removeSingleProduct, getActiveProducts, removeProduct, addNewProduct, getCustomerProducts, getSingleProduct, putUpdatedProduct } = require('../models/Product');
 const { getActiveCustomer } = require('../models/ActiveCustomer');
 const {red, magenta, blue} = require("chalk");
 const colors = require("colors/safe");
@@ -42,6 +42,7 @@ module.exports.promptNewProduct = (req, res, next) => {
 module.exports.addProduct = (data) => {
   addNewProduct(data);
 }
+
 
 // AH & JT: FROM MODEL, UPDATES PROD TO DB
 module.exports.promptUpdateProduct = (data) => {
@@ -108,7 +109,7 @@ let getSelectedProduct = (prodObject) => {
         ],
         function(err, data) {
           if (err) return reject (err)
-            object.title = data.title;
+                     object.title = data.title;
           getSelectedProduct(object);
             resolve(data);
         })
@@ -156,3 +157,35 @@ let getSelectedProduct = (prodObject) => {
     })
   })
 }
+
+//Bobby: FROM MODEL, FETCHES PRODUCT FROM ACTIVE USER DB AND DISPLAYS THE ONES NOT LINKED TO A PRODUCT ORDER
+module.exports.promptGetActiveUserProducts = (userInput) => {
+  let productRemoveArray = [];
+  return new Promise( (resolve, reject) => {
+    getActiveProducts().then(data => {
+      for (let i = 0; i < data.length; i++) {
+        data[i].removeProductID = i + 1;
+        productRemoveArray.push(data[i]);
+        console.log(`${magenta(i + 1 + ".")} ${data[i].title}`)
+      }
+      console.log("");
+      prompt.get(
+        [
+          {
+            name: "name",
+            description: "Select a product to remove from the system",
+            type: "string",
+            required: true
+          }
+        ],
+        function(err, data) {
+          if (err) return reject (err)
+          resolve(data);
+          let object = productRemoveArray[parseInt(`${data.name}` - 1)];
+          //Bobby: CALLS FUNCTION THAT DELETES A PRODUCT FROM HE ACTIVE USERS DB NOT LINKED TO AN ORDER
+          removeProduct(object);
+        }
+      );
+    })
+  })
+};
