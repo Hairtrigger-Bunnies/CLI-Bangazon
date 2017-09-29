@@ -3,13 +3,7 @@
 const prompt = require("prompt");
 const { getAllPaymentTypes } = require("../models/PaymentType");
 const { getAllProducts } = require("../models/Product");
-const {
-  addOrderProduct,
-  addPaymentTypeToOrder,
-  getOrderID,
-  createOrder,
-  checkForExistingOrder
-} = require("../models/Order");
+const { addOrderProduct, addPaymentTypeToOrder, getOrderID, createOrder, checkForExistingOrder } = require("../models/Order");
 const { getActiveCustomer } = require("../models/ActiveCustomer");
 const { red, magenta, blue } = require("chalk");
 const colors = require("colors/safe");

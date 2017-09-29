@@ -1,7 +1,7 @@
 "use strict";
 
 const prompt = require("prompt");
-const { addNewProduct, getCustomerProducts } = require("../models/Product");
+const { addNewProduct, getAllProducts, removeSingleProduct, getActiveProducts, removeProduct } = require("../models/Product");
 const { getActiveCustomer } = require("../models/ActiveCustomer");
 const { red, magenta, blue } = require("chalk");
 const colors = require("colors/safe");
