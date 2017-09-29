@@ -13,21 +13,9 @@ const db = new sqlite3.Database(dbPath);
 
 // app Ctrls
 const { promptNewCustomer } = require("./controllers/customerCtrl");
-const {
-  promptCompleteOrder,
-  promptAddProductToOrder,
-  addProductToOrder,
-  paymentHandler
-} = require("./controllers/orderCtrl");
-const {
-  promptActiveCustomer,
-  getActive
-} = require("./controllers/activeCustomerCtrl");
-const {
-  promptNewProduct,
-  addProduct,
-  promptGetActiveUserProducts
-} = require("./controllers/productCtrl");
+const { promptCompleteOrder, promptAddProductToOrder, addProductToOrder, paymentHandler } = require("./controllers/orderCtrl");
+const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
+const { promptNewProduct, addProduct, promptGetActiveUserProducts } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 const { setActiveCustomer } = require("./models/ActiveCustomer");
 
@@ -35,8 +23,9 @@ const { setActiveCustomer } = require("./models/ActiveCustomer");
 const { createNewCustomer, getCustRevenue } = require("./models/Customer");
 const { getStaleProducts } = require("./models/Product");
 
+
+
 module.exports.mainMenuHandler = (err, userInput) => {
-  console.log("user input", userInput);
   if (userInput.choice == "1") {
     // calling promptNewCustomer when user inputs 1 (DR)
     promptNewCustomer().then(custData => {
@@ -81,7 +70,9 @@ module.exports.mainMenuHandler = (err, userInput) => {
       const { displayWelcome } = require("./ui");
       displayWelcome();
     });
-  } else if (userInput.choice == "6") {
+  }
+
+  else if (userInput.choice == "6") {
     //Josh: CALLS PROMPTS FROM ORDERCTRL
     promptCompleteOrder().then(orderData => {
       console.log("order data to save", orderData);
@@ -96,25 +87,30 @@ module.exports.mainMenuHandler = (err, userInput) => {
       const { displayWelcome } = require("./ui");
       displayWelcome();
     });
-  } else if (userInput.choice == "9") {
-    //(DR) calls getStaleProducts from product model
-    getStaleProducts().then(Data => {
+  }
+  else if (userInput.choice == "9") {
+   //(DR) calls getStaleProducts from product model
+      getStaleProducts().then(Data => {
       console.log("Data", Data);
       const { displayWelcome } = require("./ui");
       displayWelcome();
     });
-  } else if (userInput.choice == "10") {
+  }
+  else if (userInput.choice == "10") {
     //(DR) calls getCustRevenue from customer model
     getCustRevenue().then(Data => {
       console.log("Data", Data);
       const { displayWelcome } = require("./ui");
       displayWelcome();
     });
-  } else {
+  }
+  else if (userInput.choice == '12'){
+    console.log('Thank you for using Bangazon!');
+  }
+  else {
     //Josh: FORCES USER TO SELECT AVAILABLE NUMBER
     const { displayWelcome } = require("./ui");
     displayWelcome();
-    console.log("input =", userInput.choice);
-    console.log("Please select a number YOOOOOOOOOOOOOO");
+    console.log("Please select a number");    
   }
 };
