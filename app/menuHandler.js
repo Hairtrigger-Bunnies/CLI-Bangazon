@@ -96,14 +96,6 @@ module.exports.mainMenuHandler = (err, userInput) => {
       displayWelcome();
     });
   }
-  else if (userInput.choice == "9") {
-    //Bobby: Calls prompts from products controller
-    promptViewStaleProducts(userInput.choice).then(prodData => {
-      console.log("View stale products", prodData);
-      const { displayWelcome } = require('./ui');
-      displayWelcome();
-    });
-  }
   else if (userInput.choice == "10") {
     //(DR) calls getCustRevenue from customer model
     getCustRevenue().then(Data => {

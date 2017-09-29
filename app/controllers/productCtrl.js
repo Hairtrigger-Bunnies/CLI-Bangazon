@@ -75,8 +75,4 @@ module.exports.promptGetActiveUserProducts = (userInput) => {
       );
     });
   });
-
-  //Bobby: FROM MODEL, FETCHES STALE PRODUCTS
-  
-
 };
