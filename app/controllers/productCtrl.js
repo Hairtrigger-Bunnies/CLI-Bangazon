@@ -72,6 +72,10 @@ module.exports.promptGetActiveUserProducts = (userInput) => {
           removeProduct(object);
         }
       );
-    })
-  })
+    });
+  });
+
+  //Bobby: FROM MODEL, FETCHES STALE PRODUCTS
+  
+
 };

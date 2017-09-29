@@ -72,3 +72,18 @@ module.exports.getActiveProducts = () => {
     });
   });
 };
+
+//Bobby and David: fetch products that have never been added to an order, and has been in the system for more than 180 days
+module.exports.getStaleProducts = () => {
+  return new Promise( (resolve, reject) => {
+    db.all(
+      `SELECT p.ProductID, p.title, p.price, p.description, p.customer_id, o.order_date FROM Products p
+      LEFT JOIN Orders o ON p.customer_id = o.customer_id 
+      LEFT JOIN Order_Products op WHERE strftime('%d.%m.%Y', o.order_date) BETWEEN date('2017-09-29') AND date('2017-03-29')`,
+      (err, Data) => {
+        if (err) return reject(err);
+        resolve(Data);
+      }
+    );
+  })
+}
