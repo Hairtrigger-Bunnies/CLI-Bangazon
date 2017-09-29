@@ -22,11 +22,11 @@ const { setActiveCustomer } = require("./models/ActiveCustomer");
 
 // app models
 const { createNewCustomer, getCustRevenue } = require("./models/Customer");
+const { getStaleProducts } = require("./models/Product");
 
 
 
 module.exports.mainMenuHandler = (err, userInput) => {
-  console.log("user input", userInput);
   if (userInput.choice == "1") {
     // calling promptNewCustomer when user inputs 1 (DR)
     promptNewCustomer().then(custData => {
@@ -78,7 +78,7 @@ module.exports.mainMenuHandler = (err, userInput) => {
       displayWelcome();
     });
   }
-  
+
   else if (userInput.choice == "6") {
     //Josh: CALLS PROMPTS FROM ORDERCTRL
     promptCompleteOrder().then(orderData => {
@@ -99,6 +99,13 @@ module.exports.mainMenuHandler = (err, userInput) => {
   else if (userInput.choice == "8") {
     // AH & JT CALLS PROMPTS FROM PRODUCTSCTRL
     promptUpdateProduct();
+  else if (userInput.choice == "9") {
+   //(DR) calls getStaleProducts from product model
+      getStaleProducts().then(Data => {
+      console.log("Data", Data);
+      const { displayWelcome } = require("./ui");
+      displayWelcome();
+    });
   }
   else if (userInput.choice == "10") {
     //(DR) calls getCustRevenue from customer model
@@ -108,11 +115,13 @@ module.exports.mainMenuHandler = (err, userInput) => {
       displayWelcome();
     });
   }
+  else if (userInput.choice == '12'){
+    console.log('Thank you for using Bangazon!');
+  }
   else {
     //Josh: FORCES USER TO SELECT AVAILABLE NUMBER
     const { displayWelcome } = require('./ui');
     displayWelcome();
-    console.log('input =', userInput.choice);
-    console.log("Please select a number YOOOOOOOOOOOOOO");    
+    console.log("Please select a number");    
   }
 };

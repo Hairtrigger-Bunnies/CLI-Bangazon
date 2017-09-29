@@ -101,3 +101,19 @@ module.exports.putUpdatedProduct = (product) => {
     });
   });
 };
+ // (DR/Bobby) getStaleProducts gets product not on an order 180 day old resolves data for manhandler
+module.exports.getStaleProducts = () => {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT DISTINCT p.ProductID, p.title, p.price, p.description, p.customer_id, o.order_date FROM Products p
+      LEFT JOIN Orders o ON p.customer_id = o.customer_id 
+      LEFT JOIN Order_Products op WHERE p.ProductID = op.ProductID 
+      AND o.order_date < date('now', '-6 months') 
+      OR o.order_date IS null`,
+      (err, Data) => {
+        if (err) return reject(err);
+        resolve(Data);
+      }
+    );
+  });
+};
