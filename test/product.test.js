@@ -1,5 +1,7 @@
 const { assert: {equal, isFunction, isNumber, deepEqual, isObject, isArray, exists, done } } = require('chai');
-const { addNewProduct, getSingleProduct, removeProduct, getActiveProducts } = require('../app/models/Product');
+const { addNewProduct, getSingleProduct, getCustomerProducts, removeProduct, getActiveProducts } = require('../app/models/Product');
+const { promptUpdateProduct } = require('../app/controllers/productCtrl');
+
 
 // Bobby: tests for getting active customer product list
 describe('Products model', () => {
@@ -30,7 +32,7 @@ describe('addSingleProduct', () => {
   it('should be a function', () => {
     isFunction(addNewProduct);
   });
-
+  
   // it('should be a function', () => {
   //   isFunction(getActiveCustomer);
   // });
@@ -61,7 +63,55 @@ describe('addSingleProduct', () => {
   //     console.log("err getting cust info", err)
   //   });
   // });
+});
 
+describe('getCustomerProducts', () => {
+
+  it('should be a function', () => {
+    isFunction(getCustomerProducts);
+  });
+
+  it('should be an object', () => {
+    getCustomerProducts()
+    .then( (data) => {
+        isObject(data);
+      })
+      .catch( (err) => {
+        console.log("error getting product info", err)
+      });
+    })
+  });
+
+  describe('promptUpdateProduct', () => {
+    
+    it('should be a function', () => {
+      isFunction(promptUpdateProduct);
+    });
+
+    it('should be an array', () => {
+      getCustomerProducts()
+      .then( (data) => {
+        isArray(data);
+      })
+      .catch( (err) => {
+        console.log("error getting data product info", err);
+      });
+    });
+
+  });
+
+  describe('getSingleProduct', () => {
+
+    it('should return an object', () => {
+      getSingleProduct()
+      .then( (data) => {
+        isObject(data);
+      })
+      .catch( (err) => {
+        console.log("error getting single product info", err);
+      });
+    });
+  });
   // Items can be removed from bag, per child only. Removing ball from the bag should not be allowed. A child's name must be specified.
   // describe('removeItem', () => {
   //   it('should be a function', () => {
@@ -69,3 +119,4 @@ describe('addSingleProduct', () => {
   //   });
   // });
 });
+

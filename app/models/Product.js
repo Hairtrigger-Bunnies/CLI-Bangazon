@@ -37,6 +37,15 @@ module.exports.getAllProducts = () => {
   });
 };
 
+module.exports.getCustomerProducts = () => {
+  return new Promise( (resolve, reject) => {
+    db.all('SELECT * FROM Products WHERE customer_id = 1', (err, Data) => {
+      if (err) return reject(err);
+      resolve(Data);
+          });
+  });
+};
+
 //Josh: INSERTS PRODUCT AND ORDER INTO JOIN TABLE. 5 WILL BE UPDATED SOON
 module.exports.addOrderProduct = (data) => {
   return new Promise( (resolve, reject) => {
@@ -59,6 +68,19 @@ module.exports.removeProduct = (customerInput) => {
   });
 };
 
+
+module.exports.getActiveProducts = () => {
+  return new Promise((resolve, reject) => {
+    db.all(`SELECT Products.ProductID, Products.title, Products.price, Products.description, Products.customer_id FROM Products 
+            LEFT OUTER JOIN Order_Products ON Products.ProductID = Order_Products.ProductID
+            WHERE customer_id = "3" AND Order_Products.OrderProductID IS NULL;`, 
+         (err, Data) => {
+      if (err) return reject(err);
+      resolve(Data);
+    });
+  });
+};
+
 //Bobby: FETCHES AND DISPLAYS ALL ACTIVE CUSTOMER'S PRODUCSTS WHEN ENTERED
 module.exports.getActiveProducts = () => {
   let customer_id = getActiveCustomer();
@@ -72,3 +94,17 @@ module.exports.getActiveProducts = () => {
     });
   });
 };
+
+
+module.exports.putUpdatedProduct = (product) => {
+  return new Promise((resolve, reject) => {
+    db.run(`UPDATE Products
+            SET title = "${product.title}", price = ${product.price}, description = "${product.description}"
+            WHERE ProductID = ${product.ProductID}`, 
+        (err, Data) => {
+      if (err) return reject(err);
+      resolve(Data);
+    });
+  });
+};
+
