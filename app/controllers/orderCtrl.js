@@ -3,7 +3,7 @@
 const prompt = require('prompt');
 const { getAllPaymentTypes } = require('../models/PaymentType')
 const { getAllProducts } = require('../models/Product');
-const { addOrderProduct, addPaymentTypeToOrder } = require('../models/Order');
+const { addOrderProduct, addPaymentTypeToOrder, getOrderID, createOrder, checkForExistingOrder } = require('../models/Order');
 const { getActiveCustomer } = require('../models/ActiveCustomer');
 const {red, magenta, blue} = require("chalk");
 const colors = require("colors/safe");
@@ -16,7 +16,7 @@ module.exports.promptCompleteOrder = () => {
     getAllPaymentTypes()
       .then( (data) => {
         for(let i = 0; i < data.length; i++) {
-          console.log(`  ${magenta(i+1+'.')} ${data[i].payment_type} ${data[i].account_number}`)
+          console.log(`  ${magenta(data[i].PaymentTypeID+'.')} ${data[i].payment_type} ${data[i].account_number}`)
         }
         console.log('');
         //Josh: WILL NEED TO CHOOSE CORRECT PAYMENT ID. EX 1 FOR CUSTOMER 1 WILL BE DIFFERENT THAN 1 FOR CUSTOMER 2. WHEN ADDING PAYTYPE TO ORDER IT WILL SELECT WRONG PAYTYPE 
@@ -42,7 +42,7 @@ module.exports.promptAddProductToOrder = () => {
     getAllProducts()
     .then( (data) => {
       for(let i = 0; i < data.length; i++) {
-        console.log(`  ${magenta(i+1+'.')} ${data[i].title} ${data[i].price} ${data[i].description}`)
+        console.log(`  ${magenta(data[i].ProductID+'.')} ${data[i].title} ${data[i].price} ${data[i].description}`)
       }
       console.log('');
       prompt.get([{
@@ -62,12 +62,26 @@ module.exports.promptAddProductToOrder = () => {
 
 //Josh: DEPENDING ON WHICH INPUT, WILL PASS ALONG PAYTYPEID TO FUNCTION
 module.exports.paymentHandler = (userInput) => {
-  // console.log('you chose', userInput.name);
   addPaymentTypeToOrder(userInput);
 }
 
-//Josh: ADDS PRODUCT
+let existingOrder;
+
+//Josh: ADDS PRODUCT. CHECKS IF ORDER EXISTS OR NOT
 module.exports.addProductToOrder = (userInput) => {
-  console.log('you chose', userInput.name);
-  addOrderProduct(userInput);
-}
+  checkForExistingOrder().then( (data) => {
+    if(data == undefined) {
+      createOrder(userInput)
+      .then( (data) => {
+        addOrderProduct(data);
+      });
+    } else {
+      //Josh: SINCE YOU CAN'T PASS THIS.LASTID AND INPUTDATA TOGETHER, CREATE A VARIABLE TO TAKE BOTH
+      existingOrder = {
+        id: data,
+        name: userInput.name
+      }
+      addOrderProduct(existingOrder);   
+    }
+  }) 
+};

@@ -52,16 +52,16 @@ module.exports.getCustRevenue = () => {
     // (DR) Using getActiveCustomer to grab the customer_id
     let customer_id = getActiveCustomer();
     db.all(
-      `select op.orderProductId, p.title, o.customer_id,
-    count(p.title) as Quantity,
-    sum(p.price) as Revenue
-    from products p	
-    left join Order_Products op
-    on p.productId = op.productId
-    left join orders o
-    on o.orderId = op.orderId
-      WHERE o.customer_id = "${customer_id}"
-	GROUP by op.productId `,
+      `select op.orderProductId, p.title, o.customer_id, o.payment_type_id,
+      count(p.title) as Quantity,
+      sum(p.price) as Revenue
+      from products p    
+      left join Order_Products op
+      on p.productId = op.productId
+      left join orders o
+      on o.orderId = op.orderId
+        WHERE o.customer_id = "${customer_id}"
+      GROUP by o.payment_type_id` ,
       (err, Data) => {
         if (err) return reject(err);
         resolve(Data);
