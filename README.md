@@ -69,22 +69,8 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 ### Chai
 1. npm install chai to install chai.
 
+
 ## Using the CLI
-
-
-
-## 8. Update product information
-1. To Update Product Information the user must first choose an Active User from Option #2. 
-2. After Active User is selected. The User will then choose Option #8. This will bring up a list of that Active Users Products.
-3. The User will then select the Product number they would like to update.
-4. They are then given a list of Options to choose from:
-    1. Title-- User can press "1" to Update the Product's Title.
-    2. Price-- User can press "2" to Update the Product's Price.
-    3. Description-- User can press "3" to Update the Product's Description.
-    4. Quantity-- User can press "4" to Update the Product's Quantity 
-    5. Save-- User can press "5" to Save the changes to the database.
-    6. Return to Main Menu-- User can press "6" to return the User to the Main Menu at anytime.
-    
 
 ## 1. Create Customer Account
 1. To create customer Information the user must first choose Option #1. 
@@ -103,3 +89,15 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 2. After option #7 is selected, the User will then be given a list of products related to the active customer that are not currently active on orders. 
 3. Depending on which ever product the user wants to delete, all that is required is to type in the number correlating with the product and pressing enter.
 4. After pressing enter, the product will be erased from the database completely.
+
+## 8. Update product information
+1. To Update Product Information the user must first choose an Active User from Option #2. 
+2. After Active User is selected. The User will then choose Option #8. This will bring up a list of that Active Users Products.
+3. The User will then select the Product number they would like to update.
+4. They are then given a list of Options to choose from:
+    1. Title-- User can press "1" to Update the Product's Title.
+    2. Price-- User can press "2" to Update the Product's Price.
+    3. Description-- User can press "3" to Update the Product's Description.
+    4. Quantity-- User can press "4" to Update the Product's Quantity 
+    5. Save-- User can press "5" to Save the changes to the database.
+    6. Return to Main Menu-- User can press "6" to return the User to the Main Menu at anytime.
