@@ -64,10 +64,10 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 1. Within SQLite, open the database “bangazoncorp.sqlite” from “db” folder within VS Code to access the DB Browser and its data within SQLite.
 
 ### Mocha
-1. npm install mocha to install Mocha.
+1. Run ```npm install mocha``` on the command line to install Mocha.
 
 ### Chai
-1. npm install chai to install chai.
+1. Run ```npm install chai``` on the command line to install Chai.
 
 
 ## Using the CLI
@@ -101,13 +101,3 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
     4. Quantity-- User can press "4" to Update the Product's Quantity 
     5. Save-- User can press "5" to Save the changes to the database.
     6. Return to Main Menu-- User can press "6" to return the User to the Main Menu at anytime.
-    
-## 9. View Stale Products
-1. To View Stale Products Information the user must first choose an Active User from Option #2. 
-2. After Active User is selected. The User will then choose Option #9. This will bring up a list all the Stale Products.
-
-## 10. View Revenue Report
-1. To View Customer Revenue Information the user must first choose an Active User from Option #2. 
-2. After Active User is selected. The User will then choose Option #10. This will bring up a list of costumer Products and the Revenue Report.
-
-    
