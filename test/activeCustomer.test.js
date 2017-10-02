@@ -14,10 +14,6 @@ describe('active customers model', () => {
     isFunction(getActiveCustomer);
   });
 
-  
-    });
-
-
   //Josh: HAD TO GIVE IT PROPER DATA TO TEST
   it('setActiveCustomer should accept a number argument that determines the ID of the active customer object', function() {
     let data = {
@@ -30,10 +26,8 @@ describe('active customers model', () => {
 
 //Tests for active customer controller
 describe('active customers controller', () => {
-  
-    it('should be a function', () => {
-      isFunction(promptActiveCustomer);
-    });
-  
-  
+  it('should be a function', () => {
+    isFunction(promptActiveCustomer);
   });
+});
+});
