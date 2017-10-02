@@ -84,4 +84,17 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
     4. Quantity-- User can press "4" to Update the Product's Quantity 
     5. Save-- User can press "5" to Save the changes to the database.
     6. Return to Main Menu-- User can press "6" to return the User to the Main Menu at anytime.
+    
+
+## 1. Create Customer Account
+1. To create customer Information the user must first choose Option #1. 
+2. After option 1 is selected. The User will then be prompted to fill in customer information.
+3. The User will then enter:
+    1. First and Last name.
+    2. Street Address.
+    3. City.
+    4. State. 
+    5. Postal Code.
+    6. Phone Number.
+ 4. Then the Customer will be created.
 
