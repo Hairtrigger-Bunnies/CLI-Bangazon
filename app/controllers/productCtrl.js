@@ -2,7 +2,7 @@
 
 const prompt = require('prompt');
 const { getActiveCustomer } = require('../models/ActiveCustomer');
-const { addNewProduct, getAllProducts, removeSingleProduct, getActiveProducts, removeProduct, getCustomerProducts, putUpdatedProduct } = require('../models/Product');
+const { addNewProduct, getAllProducts, removeSingleProduct, getActiveProducts, removeProduct, getCustomerProducts, putUpdatedProduct, getStaleProducts } = require('../models/Product');
 const {red, magenta, blue} = require("chalk");
 const colors = require("colors/safe");
 
@@ -213,3 +213,25 @@ let getSelectedProduct = (prodObject) => {
     })
   })
 }
+
+//(DR/BS) listStaleProduct takes data from getStaleProducts pushes into empty array to console into list format
+module.exports.listStaleProducts = () => {
+  let productArray = [];
+  return new Promise( (resolve, reject) => {
+    getStaleProducts()
+    .then( (data) => {
+        console.log("");
+      for (let i=0; i < data.length; i++) {
+        productArray.push(data[i]);
+        console.log( `${magenta(i + 1 + ".")} 
+        ProductID: ${data[i].ProductID} 
+        Title: ${data[i].title} 
+        Price: ${data[i].price} 
+        Description: ${data[i].description} 
+        Order_Date: ${data[i].order_date}`)
+       
+        }
+      console.log("");
+      });
+    });
+  };

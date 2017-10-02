@@ -15,7 +15,7 @@ const db = new sqlite3.Database(dbPath);
 const { promptNewCustomer } = require("./controllers/customerCtrl");
 const { promptCompleteOrder, promptAddProductToOrder, addProductToOrder, paymentHandler } = require("./controllers/orderCtrl");
 const { promptActiveCustomer, getActive } = require("./controllers/activeCustomerCtrl");
-const { promptNewProduct, addProduct, promptGetActiveUserProducts, promptUpdateProduct } = require("./controllers/productCtrl");
+const { promptNewProduct, addProduct, promptGetActiveUserProducts, promptUpdateProduct, listStaleProducts } = require("./controllers/productCtrl");
 const { promptNewPayment, addPayment } = require("./controllers/paymentCtrl");
 const { setActiveCustomer } = require("./models/ActiveCustomer");
 
@@ -94,11 +94,10 @@ module.exports.mainMenuHandler = (err, userInput) => {
   }
   else if (userInput.choice == "9") {
    //(DR) calls getStaleProducts from product model
-      getStaleProducts().then(Data => {
-      console.log("Data", Data);
-      const { displayWelcome } = require("./ui");
-      displayWelcome();
-    });
+      listStaleProducts();
+      // const { displayWelcome } = require("./ui");
+      // displayWelcome();
+    
   }
   else if (userInput.choice == "10") {
     //(DR) calls getCustRevenue from customer model
@@ -118,3 +117,7 @@ module.exports.mainMenuHandler = (err, userInput) => {
     console.log("Please select a number");    
   }
 };
+
+
+//getStaleProducts().then(Data => {
+  //console.log("Data", Data);
