@@ -96,6 +96,34 @@ module.exports.getStaleProducts = () => {
   });
 };
 
+//Jevon & Aspen: GETS THE ACTIVE CUSTOMER'S PRODUCTS
+module.exports.getCustomerProducts = () => {
+  let customer_id = getActiveCustomer();
+  if ( customer_id !== undefined ) {
+    return new Promise( (resolve, reject) => {
+      db.all(`SELECT * FROM Products WHERE customer_id = ${customer_id}`, (err, Data) => {
+        if (err) return reject(err);
+        resolve(Data);
+      });
+    });
+  } else {
+    const { displayWelcome } = require('../ui');
+    displayWelcome();
+  };
+};
+
+//Jevon & Aspen: PUTS THE UPDATED PRODUCT TO THE DATABASE
+module.exports.putUpdatedProduct = (product) => {
+  return new Promise((resolve, reject) => {
+    db.run(`UPDATE Products
+            SET title = "${product.title}", price = ${product.price}, description = "${product.description}", quantity = "${product.quantity}"
+            WHERE ProductID = ${product.ProductID}`, 
+        (err, Data) => {
+      if (err) return reject(err);
+      resolve(Data);
+    });
+  });
+};
  // (DR/Bobby) getStaleProducts gets product not on an order 180 day old resolves data for manhandler
 module.exports.getStaleProducts = () => {
   return new Promise((resolve, reject) => {
