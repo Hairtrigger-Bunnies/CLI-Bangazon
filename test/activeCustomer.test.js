@@ -24,11 +24,10 @@ describe('active customers model', () => {
     equal(data.name, 5);
   });
 
-});
-
 //Tests for active customer controller
 describe('active customers controller', () => {
   it('should be a function', () => {
     isFunction(promptActiveCustomer);
   });
+});
 });
