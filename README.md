@@ -71,4 +71,16 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 
 ## Using the CLI
 
+### 8. Update product information
+1. To Update Product Information the user must first choose an Active User from Option #2. 
+2. After Active User is selected. The User will then choose Option #8. This will bring up a list of that Active Users Products.
+3. The User will then select the Product number they would like to update.
+4. They are then given a list of Options to choose from:
+  1. Title-- User can press "1" to Update the Product's Title.
+  2. Price-- User can press "2" to Update the Product's Price.
+  3. Description-- User can press "3" to Update the Product's Description.
+  4. Quantity-- User can press "4" to Update the Product's Quantity 
+  5. Save-- User can press "5" to Save the changes to the database.
+  6. Return to Main Menu-- User can press "6" to return the User to the Main Menu at anytime.
+
 
