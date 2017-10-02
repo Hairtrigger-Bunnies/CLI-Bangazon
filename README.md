@@ -98,3 +98,8 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
     6. Phone Number.
  4. Then the Customer will be created.
 
+## 7. Remove Customer Product
+1. To remove a product from the the database, the user must first select option #7. 
+2. After option #7 is selected, the User will then be given a list of products related to the active customer that are not currently active on orders. 
+3. Depending on which ever product the user wants to delete, all that is required is to type in the number correlating with the product and pressing enter.
+4. After pressing enter, the product will be erased from the database completely.
