@@ -64,11 +64,52 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 1. Within SQLite, open the database “bangazoncorp.sqlite” from “db” folder within VS Code to access the DB Browser and its data within SQLite.
 
 ### Mocha
-1. npm install mocha to install Mocha.
+1. Run ```npm install mocha``` on the command line to install Mocha.
 
 ### Chai
-1. npm install chai to install chai.
+1. Run ```npm install chai``` on the command line to install Chai.
+
 
 ## Using the CLI
 
+## 1. Create Customer Account
+1. To create customer Information the user must first choose Option #1. 
+2. After option 1 is selected. The User will then be prompted to fill in customer information.
+3. The User will then enter:
+    1. First and Last name.
+    2. Street Address.
+    3. City.
+    4. State. 
+    5. Postal Code.
+    6. Phone Number.
+ 4. Then the Customer will be created.
+ 
+## 2. Choose Active Customer
+1. To choose an Active Customer the user must first choose Option #2 from the menu. 
+2. After option 2 is selected. The User will then choose an Active Customer.  
 
+## 7. Remove Customer Product
+1. To remove a product from the the database, the user must first select option #7. 
+2. After option #7 is selected, the User will then be given a list of products related to the active customer that are not currently active on orders. 
+3. Depending on which ever product the user wants to delete, all that is required is to type in the number correlating with the product and pressing enter.
+4. After pressing enter, the product will be erased from the database completely.
+
+## 8. Update product information
+1. To Update Product Information the user must first choose an Active User from Option #2. 
+2. After Active User is selected. The User will then choose Option #8. This will bring up a list of that Active Users Products.
+3. The User will then select the Product number they would like to update.
+4. They are then given a list of Options to choose from:
+    1. Title-- User can press "1" to Update the Product's Title.
+    2. Price-- User can press "2" to Update the Product's Price.
+    3. Description-- User can press "3" to Update the Product's Description.
+    4. Quantity-- User can press "4" to Update the Product's Quantity 
+    5. Save-- User can press "5" to Save the changes to the database.
+    6. Return to Main Menu-- User can press "6" to return the User to the Main Menu at anytime.
+    
+## 9. View Stale Products
+1. To View Stale Products Information the user must first choose an Active User from Option #2. 
+2. After Active User is selected. The User will then choose Option #9. This will bring up a list all the Stale Products.
+
+## 10. View Revenue Report
+1. To View Customer Revenue Information the user must first choose an Active User from Option #2. 
+2. After Active User is selected. The User will then choose Option #10. This will bring up a list of costumer Products and the Revenue Report.    

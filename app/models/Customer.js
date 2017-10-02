@@ -46,7 +46,7 @@ module.exports.getCustomers = () => {
   });
 };
 
-// (DR) function getCustRevenue is bringing back the revenue associated with the customer_id when logged in thru the prompt
+// (DR) function getCustRevenue is bringing back the revenue associated with the customer_id when you choose an active customer in the prompt
 module.exports.getCustRevenue = () => {
   return new Promise((resolve, reject) => {
     // (DR) Using getActiveCustomer to grab the customer_id
@@ -59,9 +59,9 @@ module.exports.getCustRevenue = () => {
       left join Order_Products op
       on p.productId = op.productId
       left join orders o
-      on o.orderId = op.orderId and o.payment_type_id is not null
+      on o.orderId = op.orderId AND o.payment_type_id IS NOT null
         WHERE o.customer_id = "${customer_id}"
-      GROUP by o.payment_type_id` ,
+      GROUP by o.payment_type_id`,
       (err, Data) => {
         if (err) return reject(err);
         resolve(Data);
