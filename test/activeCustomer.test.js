@@ -14,25 +14,14 @@ describe('active customers model', () => {
     isFunction(getActiveCustomer);
   });
 
-  it('should accept data',  () => {
-    getActiveCustomer()
-    .then( (customer) => {
-      isObject(customer);
-      console.log("customer", customer)
-    })
-    .catch( (err) => {
-      console.log("err getting cust info", err)
-    });
-  });
-
   //Josh: HAD TO GIVE IT PROPER DATA TO TEST
   it('setActiveCustomer should accept a number argument that determines the ID of the active customer object', function() {
     let data = {
-      name: ''
+      name: 5
     }
     setActiveCustomer(data, '5');
 
-    assert.equal(data.name, '5');
+    equal(data.name, 5);
   });
 
 });
