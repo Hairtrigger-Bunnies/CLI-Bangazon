@@ -1,5 +1,5 @@
 const { assert: {equal, isFunction, isNumber, deepEqual, isObject, isArray, exists, done } } = require('chai');
-const { addNewProduct, getSingleProduct, removeProduct, getActiveProducts } = require('../app/models/Product');
+const { addNewProduct, getSingleProduct, removeProduct, getActiveProducts, getStaleProducts } = require('../app/models/Product');
 
 describe('Products model', () => {
   
@@ -24,15 +24,29 @@ describe('Products model', () => {
     });
   });
 
-  // Bobby: tests for viewing stale products based on requirements
-//   describe('')
-// });
+  // B&D: Tests stale products
+  describe('getStaleProducts', () => {
+    // B&D: tests to see that getStaleProducts is a function
+    it('should be a function', () => {
+      isFunction(getStaleProducts);
+    });
+    // B&D: tests to make sure getStaleProducts returns a promise
+    it('should return a promise', () => {
+      isFunction(getStaleProducts);
+    });
+    // B&D: insures the promise is resolved and is an array
+    it("promise is resolved", function() {
+      getStaleProducts().then(Data => {
+        isArray(Data);
+      });
+    });
+  });
 
-//Tests for the activeCustomer model
-describe('addSingleProduct', () => {
-
-  it('should be a function', () => {
-    isFunction(addNewProduct);
+  //Tests for the activeCustomer model
+  describe('addSingleProduct', () => {
+    it('should be a function', () => {
+      isFunction(addNewProduct);
+    });
   });
 
   // it('should be a function', () => {
