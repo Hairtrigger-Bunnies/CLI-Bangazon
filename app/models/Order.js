@@ -66,7 +66,7 @@ module.exports.addPaymentTypeToOrder = (data) => {
 	let customer_id = getActiveCustomer();
 	return new Promise( (resolve, reject) => {
 		db.run(`UPDATE Orders 
-						SET payment_type_id = ${data.name}
+						SET payment_type_id = ${data.paytype_id}
 						WHERE payment_type_id is null and customer_id = ${customer_id}`)
 	})
 }

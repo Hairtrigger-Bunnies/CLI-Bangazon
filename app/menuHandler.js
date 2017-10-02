@@ -99,6 +99,7 @@ module.exports.mainMenuHandler = (err, userInput) => {
   else if (userInput.choice == "8") {
     // AH & JT CALLS PROMPTS FROM PRODUCTSCTRL
     promptUpdateProduct();
+  }
   else if (userInput.choice == "9") {
    //(DR) calls getStaleProducts from product model
       getStaleProducts().then(Data => {
