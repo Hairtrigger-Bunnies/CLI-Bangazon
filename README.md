@@ -83,6 +83,10 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
     5. Postal Code.
     6. Phone Number.
  4. Then the Customer will be created.
+ 
+## 2. Choose Active Customer
+1. To choose an Active Customer the user must first choose Option #2 from the menu. 
+2. After option 2 is selected. The User will then choose an Active Customer.  
 
 ## 7. Remove Customer Product
 1. To remove a product from the the database, the user must first select option #7. 
