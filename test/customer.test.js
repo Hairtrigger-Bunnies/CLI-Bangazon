@@ -1,7 +1,7 @@
 const { assert: { equal, isFunction, isObject } } = require("chai");
 const { createNewCustomer } = require("../app/models/Customer");
 const { promptNewCustomer } = require("../app/controllers/customerCtrl");
-const { getCustRevenue } = require("../app/models/Customer");
+const { getCustRevenue, getCustomers } = require("../app/models/Customer");
 // customer model test
 
 // createNewCustomer is a function (DR)

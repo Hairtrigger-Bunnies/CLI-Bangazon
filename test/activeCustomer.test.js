@@ -39,10 +39,7 @@ describe('active customers model', () => {
 
 //Tests for active customer controller
 describe('active customers controller', () => {
-  
-    it('should be a function', () => {
-      isFunction(promptActiveCustomer);
-    });
-  
-  
+  it('should be a function', () => {
+    isFunction(promptActiveCustomer);
   });
+});
