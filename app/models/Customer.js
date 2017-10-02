@@ -59,7 +59,7 @@ module.exports.getCustRevenue = () => {
       left join Order_Products op
       on p.productId = op.productId
       left join orders o
-      on o.orderId = op.orderId
+      on o.orderId = op.orderId and o.payment_type_id is not null
         WHERE o.customer_id = "${customer_id}"
       GROUP by o.payment_type_id` ,
       (err, Data) => {
