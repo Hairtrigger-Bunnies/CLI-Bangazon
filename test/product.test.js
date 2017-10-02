@@ -1,8 +1,9 @@
 const { assert: {equal, isFunction, isNumber, deepEqual, isObject, isArray, exists, done } } = require('chai');
-const { addNewProduct, getSingleProduct, removeProduct, getActiveProducts } = require('../app/models/Product');
+const { addNewProduct, getSingleProduct, removeProduct, getActiveProducts, getStaleProducts } = require('../app/models/Product');
 
-// Bobby: tests for getting active customer product list
 describe('Products model', () => {
+  
+  // Bobby: tests for getting active customer product list
   describe('getActiveProducts fetches products', () => {
     it('should exist', () => {
       isFunction(getActiveProducts);
@@ -22,13 +23,30 @@ describe('Products model', () => {
       });
     });
   });
-});
 
-//Tests for the activeCustomer model
-describe('addSingleProduct', () => {
+  // B&D: Tests stale products
+  describe('getStaleProducts', () => {
+    // B&D: tests to see that getStaleProducts is a function
+    it('should be a function', () => {
+      isFunction(getStaleProducts);
+    });
+    // B&D: tests to make sure getStaleProducts returns a promise
+    it('should return a promise', () => {
+      isFunction(getStaleProducts);
+    });
+    // B&D: insures the promise is resolved and is an array
+    it("promise is resolved", function() {
+      getStaleProducts().then(Data => {
+        isArray(Data);
+      });
+    });
+  });
 
-  it('should be a function', () => {
-    isFunction(addNewProduct);
+  //Tests for the activeCustomer model
+  describe('addSingleProduct', () => {
+    it('should be a function', () => {
+      isFunction(addNewProduct);
+    });
   });
 
   // it('should be a function', () => {

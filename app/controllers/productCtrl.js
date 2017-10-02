@@ -72,8 +72,8 @@ module.exports.promptGetActiveUserProducts = (userInput) => {
           removeProduct(object);
         }
       );
-    })
-  })
+    });
+  });
 };
 
 //Jevon & Aspen: GETS THE ACTIVE USER'S PRODUCTS AND LISTS THEM FOR THE USER TO CHOOSE FROM
