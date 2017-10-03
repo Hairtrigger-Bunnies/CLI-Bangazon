@@ -121,7 +121,11 @@ module.exports.mainMenuHandler = (err, userInput) => {
       const { displayWelcomeForCustomer } = require("./ui");
       displayWelcomeForCustomer();
     });
-  } 
+  } else {
+    const { displayWelcome } = require("./ui");
+    displayWelcome();
+    console.log("Please select a number");        
+  }
 };
 
 
