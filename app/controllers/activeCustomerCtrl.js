@@ -13,6 +13,7 @@ module.exports.promptActiveCustomer = () => {
     console.log("");
     //Josh: DISPLAYS EACH CUSTOMER FROM CUSTOMER MODEL TO SELECT
     getCustomers().then(data => {
+      //Josh: THROWS DATA INTO ARRAY FOR REGEXP. CAN ONLY CHOOSE FROM AVAILABLE CUSTOMERS AND WILL NOW DISPLAY 1 - #
       let regArr = [];
       for (let i = 0; i < data.length; i++) {
         console.log(
