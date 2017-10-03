@@ -88,6 +88,13 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 1. To choose an Active Customer the user must first choose Option #2 from the menu. 
 2. After option 2 is selected. The User will then choose an Active Customer.  
 
+## 3. Add Payment Option
+1. To add a payment option to the customer account, first you must select option 1 or 2 two create a customer or select an active customer.
+2. Once customer option is selected, enter in option 3 to be taken to the payment options.
+3. You'll first be prompted to enter in which type of payment card you wish to have on file (Visa, Amex, Mastercard, etc.). Type in one option and hit enter.
+4. Then, you will enter in the card number associated with the type of credit/debit card you want to store.
+5. Hitting enter saves the payment information to the user account and can be used for future order completions. 
+
 ## 4. Add Products To Sell
 1. To add products to sell the user must first choose Option #2 to and choose a active customer. 
 2. After option 2 is selected. The User will then be prompted to fill in the Product Information.
