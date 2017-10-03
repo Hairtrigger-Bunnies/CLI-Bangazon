@@ -13,15 +13,20 @@ module.exports.promptActiveCustomer = () => {
     console.log("");
     //Josh: DISPLAYS EACH CUSTOMER FROM CUSTOMER MODEL TO SELECT
     getCustomers().then(data => {
+      let regArr = [];
       for (let i = 0; i < data.length; i++) {
         console.log(
-          `  ${magenta(data[i].CustomerID + ".")} ${data[i].first_name} ${data[i].last_name}`
-        );
+          `  ${magenta([i + 1] + ".")} ${data[i].first_name} ${data[i].last_name}`)
+          regArr.push(data[i].CustomerID);
       }
+      let reg = new RegExp('^[1-' + regArr.length + ']$');
+      
       console.log("");
       prompt.get(
         [
           {
+            pattern: reg,
+            message: 'Please only enter an existing number',
             name: "id",
             description: "Choose customer to set active",
             type: "string",
@@ -30,6 +35,8 @@ module.exports.promptActiveCustomer = () => {
         ],
         function(err, data) {
           if (err) return reject (err)
+          data.customer_id = regArr[parseInt(data.id) - 1];
+          
           resolve(data);
         }
       );

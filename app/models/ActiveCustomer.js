@@ -10,7 +10,7 @@ let activeCustomer;
 //Josh: PASS USERINPUT FROM CTRL TO SET CHOICE AS ACTIVE CUSTOMER VIA ID
 module.exports.setActiveCustomer = userInput => {
   console.log("userinput", userInput);
-  activeCustomer = userInput.id;
+  activeCustomer = userInput.customer_id;
 };
 
 //Josh: CALL THIS TO GET CUSTOMERID VALUE
