@@ -71,7 +71,7 @@ module.exports.getActiveProducts = () => {
     db.all(
       `SELECT Products.ProductID, Products.title, Products.price, Products.description, Products.customer_id FROM Products 
             LEFT OUTER JOIN Order_Products ON Products.ProductID = Order_Products.ProductID
-            WHERE customer_id = ${customer_id} AND Order_Products.OrderProductID IS NULL;`,
+            WHERE customer_id = ${customer_id} AND Order_Products .OrderProductID IS NULL;`,
       (err, Data) => {
         if (err) return reject(err);
         resolve(Data);
@@ -113,10 +113,11 @@ module.exports.putUpdatedProduct = (product) => {
 module.exports.getStaleProducts = () => {
   return new Promise((resolve, reject) => {
     db.all(
-      `SELECT DISTINCT p.ProductID, p.title, p.price, p.description, p.customer_id, o.order_date FROM Products p
+      `SELECT DISTINCT p.ProductID, p.title, p.price, p.description, p.customer_id, o.order_date, o.payment_type_id  FROM Products p
       LEFT JOIN Orders o ON p.customer_id = o.customer_id 
       LEFT JOIN Order_Products op WHERE p.ProductID = op.ProductID 
-      AND o.order_date < date('now', '-6 months') 
+      AND o.order_date < date('now', '-3 months')  
+      AND o.payment_type_id IS null
       OR o.order_date IS null`,
       (err, Data) => {
         if (err) return reject(err);
