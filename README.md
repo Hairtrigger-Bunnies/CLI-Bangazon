@@ -104,6 +104,13 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
     3. Product Description.
     4. Product Type. 
  4. Then the Product to sell will be created.
+ 
+ ## 5. Add product to shopping cart
+1. When the customer selects option 5, they are prompted to choose a product from the list. Adding a product when there is no available "cart" will create a new order upon adding a product, and any subsequent products will be added to that order until it it fullfiled by selecting a payment type
+
+
+## 6. Complete an order
+1. To complete an order, the user will have to choose a payment option (set up through option #3) which will add the payment type to the order and close it. Products on closed orders will now be available when searching the customers' revenue report. Any new products added will be placed on a new order ticket.
 
 ## 7. Remove Customer Product
 1. To remove a product from the the database, the user must first select option #7. 
