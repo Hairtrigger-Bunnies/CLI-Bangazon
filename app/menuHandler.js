@@ -88,6 +88,10 @@ module.exports.customerMenuHandler = (err, userInput) => {
   else if (userInput.choice == '9'){
     console.log('Thank you for using Bangazon!');
   }
+  else if (userInput.choice == '10') {
+    const { displayWelcome } = require("./ui");
+    displayWelcome();
+  }
   else {
     //Josh: FORCES USER TO SELECT AVAILABLE NUMBER
     const { displayWelcomeForCustomer } = require("./ui");
