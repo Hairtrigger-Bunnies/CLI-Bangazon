@@ -89,7 +89,7 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 2. After option 2 is selected. The User will then choose an Active Customer.  
 
 ## 3. Add Payment Option
-1. To add a payment option to the customer account, first you must select option 1 or 2 two create a customer or select an active customer.
+1. To add a payment option to the customer account, first you must select option 1 or 2 to create a new customer or select an existing customer.
 2. Once customer option is selected, enter in option 3 to be taken to the payment options.
 3. You'll first be prompted to enter in which type of payment card you wish to have on file (Visa, Amex, Mastercard, etc.). Type in one option and hit enter.
 4. Then, you will enter in the card number associated with the type of credit/debit card you want to store.
