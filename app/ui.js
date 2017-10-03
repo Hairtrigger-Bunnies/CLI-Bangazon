@@ -12,10 +12,11 @@ const sqlite3 = require("sqlite3").verbose();
 const dbPath = path.resolve(__dirname, "..", "db", "bangazon.sqlite");
 const db = new sqlite3.Database(dbPath);
 
-const { mainMenuHandler } = require('./menuHandler');
+const { mainMenuHandler, customerMenuHandler } = require('./menuHandler');
 
 prompt.start();
 
+//Josh: THIS IS THE MENU ON STARTUP. ONLY ALLOWS CREATE CUSTOMER AND LOGIN
 const displayWelcome = () => {
   let headerDivider = `${magenta(
     "*********************************************************"
@@ -27,16 +28,7 @@ const displayWelcome = () => {
   ${headerDivider}
   ${magenta("1.")} Create a customer account
   ${magenta("2.")} Choose active customer
-  ${magenta("3.")} Create a payment option
-  ${magenta("4.")} Add product to sell
-  ${magenta("5.")} Add product to shopping cart
-  ${magenta("6.")} Complete an order
-  ${magenta("7.")} Remove customer product
-  ${magenta("8.")} Update product information
-  ${magenta("9.")} Show stale products
-  ${magenta("10.")} Show customer revenue report
-  ${magenta("11.")} See product popularity
-  ${magenta("12.")} Leave Bangazon!`);
+  `);
     console.log("");
     prompt.get(
       [
@@ -50,4 +42,37 @@ const displayWelcome = () => {
   });
 };
 
-module.exports = { displayWelcome };
+//Josh: THIS MENU ONLY DISPLAYS AFTER A CUSTOMER LOGS IN
+const displayWelcomeForCustomer = () => {
+  let headerDivider = `${magenta(
+    "*********************************************************"
+  )}`;
+  return new Promise((resolve, reject) => {
+    console.log(`
+  ${headerDivider}
+  ${magenta("**  Welcome to Bangazon! Command Line Ordering System  **")}
+  ${headerDivider}
+  ${magenta("1.")} Create a payment option
+  ${magenta("2.")} Add product to sell
+  ${magenta("3.")} Add product to shopping cart
+  ${magenta("4.")} Complete an order
+  ${magenta("5.")} Remove customer product
+  ${magenta("6.")} Update product information
+  ${magenta("7.")} Show stale products
+  ${magenta("8.")} Show customer revenue report
+  ${magenta("9.")} See product popularity
+  ${magenta("10.")} Leave Bangazon!`);
+    console.log("");
+    prompt.get(
+      [
+        {
+          name: "choice",
+          description: "Please make a selection"
+        }
+      ],
+      customerMenuHandler
+    );
+  });
+};
+
+module.exports = { displayWelcome, displayWelcomeForCustomer };

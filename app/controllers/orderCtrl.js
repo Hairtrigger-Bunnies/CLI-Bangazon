@@ -13,7 +13,6 @@ module.exports.promptCompleteOrder = () => {
   return new Promise((resolve, reject) => {
     console.log("");
     //Josh: DISPLAYS EACH PAYMENT TYPE FROM PAYTYPE MODEL TO SELECT
-<<<<<<< HEAD
     getAllPaymentTypes()
       .then( (data) => {
         let regArr = [];
@@ -34,27 +33,6 @@ module.exports.promptCompleteOrder = () => {
           type: 'string',
           required: true
         }], function(err, results) {
-=======
-    getAllPaymentTypes().then(data => {
-      for (let i = 0; i < data.length; i++) {
-        console.log(
-          `  ${magenta(data[i].PaymentTypeID + ".")} ${data[i]
-            .payment_type} ${data[i].account_number}`
-        );
-      }
-      console.log("");
-      //Josh: WILL NEED TO CHOOSE CORRECT PAYMENT ID. EX 1 FOR CUSTOMER 1 WILL BE DIFFERENT THAN 1 FOR CUSTOMER 2. WHEN ADDING PAYTYPE TO ORDER IT WILL SELECT WRONG PAYTYPE
-      prompt.get(
-        [
-          {
-            name: "name",
-            description: "Choose type of payment",
-            type: "string",
-            required: true
-          }
-        ],
-        function(err, results) {
->>>>>>> master
           if (err) return reject(err);
           //Josh: ADDS ACTIVE CUSTOMER ID TO RESULTS
           results.customer_id = getActiveCustomer();

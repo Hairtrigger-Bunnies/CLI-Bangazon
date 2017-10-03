@@ -23,8 +23,84 @@ const { setActiveCustomer } = require("./models/ActiveCustomer");
 const { createNewCustomer, getCustRevenue } = require("./models/Customer");
 const { getStaleProducts } = require("./models/Product");
 
+//Josh: IF CUSTOMER IS ALREADY LOGGED IN, ALL PROCESSES LEAD BACK TO THIS MENU HANDLER
+module.exports.customerMenuHandler = (err, userInput) => {
+  if (userInput.choice == "1") {
+    //Josh: CALLS PROMPTS FROM PAYMENTCTRL
+    promptNewPayment().then(payData => {
+      console.log("Payment option to save", payData);
+      //Josh: CALLS CONTROLLER FUNC TO ADD DATA TO DB
+      addPayment(payData);
+      const { displayWelcomeForCustomer } = require("./ui");
+      displayWelcomeForCustomer();
+    });
+  } else if (userInput.choice == "2") {
+    promptNewProduct().then(prodData => {
+      console.log("choose product to add", prodData);
+      //Josh: BRINGS IN PROMPT DATA TO ADD TO DB
+      addProduct(prodData);
+      const { displayWelcomeForCustomer } = require("./ui");
+      displayWelcomeForCustomer();
+    });
+  } else if (userInput.choice == "3") {
+    promptAddProductToOrder().then(prodData => {
+      console.log("choose product to add to order", prodData);
+      //Josh: BRINGS IN PROMPT DATA TO ADD TO DB
+      addProductToOrder(prodData);
+      const { displayWelcomeForCustomer } = require("./ui");
+      displayWelcomeForCustomer();
+    });
+  }
+  else if (userInput.choice == "4") {
+    //Josh: CALLS PROMPTS FROM ORDERCTRL
+    promptCompleteOrder().then(orderData => {
+      console.log("order data to save", orderData);
+      paymentHandler(orderData);
+      const { displayWelcomeForCustomer } = require("./ui");
+      displayWelcomeForCustomer();
+    });
+  } else if (userInput.choice == "5") {
+    //Bobby: Removes a product from the system
+    promptGetActiveUserProducts(userInput.choice).then(prodData => {
+      console.log("Remove product from the system", prodData);
+      const { displayWelcomeForCustomer } = require("./ui");
+      displayWelcomeForCustomer();
+    });
+  }
+  else if (userInput.choice == "6") {
+    // AH & JT CALLS PROMPTS FROM PRODUCTSCTRL
+    promptUpdateProduct();
+  }
+  else if (userInput.choice == "7") {
+   //(DR) calls getStaleProducts from product model
+      listStaleProducts();
+      const { displayWelcomeForCustomer } = require("./ui");
+      displayWelcomeForCustomer();
+  }
+  else if (userInput.choice == "8") {
+    //(DR) calls getCustRevenue from customer model
+    getCustRevenue().then(Data => {
+      console.log("Data", Data);
+      const { displayWelcomeForCustomer } = require("./ui");
+      displayWelcomeForCustomer();
+    });
+  }
+  else if (userInput.choice == '9'){
+    console.log('Thank you for using Bangazon!');
+  }
+  else if (userInput.choice == '10') {
+    const { displayWelcome } = require("./ui");
+    displayWelcome();
+  }
+  else {
+    //Josh: FORCES USER TO SELECT AVAILABLE NUMBER
+    const { displayWelcomeForCustomer } = require("./ui");
+    displayWelcomeForCustomer();
+    console.log("Please select a number");    
+  }
+}
 
-
+//Josh: MENU HANDLER FOR WHEN CUSTOMER IS NOT LOGGED IN YET. CREATING CUSTOMER BRINGS YOU BACK TO SAME PAGE AND THEN HAS USER LOG IN
 module.exports.mainMenuHandler = (err, userInput) => {
   if (userInput.choice == "1") {
     // calling promptNewCustomer when user inputs 1 (DR)
@@ -42,79 +118,13 @@ module.exports.mainMenuHandler = (err, userInput) => {
       console.log("active customer", custData.id);
       //Josh: SETS ACTIVE CUSTOMER BASED ON PROMPT
       setActiveCustomer(custData);
-      const { displayWelcome } = require("./ui");
-      displayWelcome();
+      const { displayWelcomeForCustomer } = require("./ui");
+      displayWelcomeForCustomer();
     });
-  } else if (userInput.choice == "3") {
-    //Josh: CALLS PROMPTS FROM PAYMENTCTRL
-    promptNewPayment().then(payData => {
-      console.log("Payment option to save", payData);
-      //Josh: CALLS CONTROLLER FUNC TO ADD DATA TO DB
-      addPayment(payData);
-      const { displayWelcome } = require("./ui");
-      displayWelcome();
-    });
-  } else if (userInput.choice == "4") {
-    promptNewProduct().then(prodData => {
-      console.log("choose product to add", prodData);
-      //Josh: BRINGS IN PROMPT DATA TO ADD TO DB
-      addProduct(prodData);
-      const { displayWelcome } = require("./ui");
-      displayWelcome();
-    });
-  } else if (userInput.choice == "5") {
-    promptAddProductToOrder().then(prodData => {
-      console.log("choose product to add to order", prodData);
-      //Josh: BRINGS IN PROMPT DATA TO ADD TO DB
-      addProductToOrder(prodData);
-      const { displayWelcome } = require("./ui");
-      displayWelcome();
-    });
-  }
-
-  else if (userInput.choice == "6") {
-    //Josh: CALLS PROMPTS FROM ORDERCTRL
-    promptCompleteOrder().then(orderData => {
-      console.log("order data to save", orderData);
-      paymentHandler(orderData);
-      const { displayWelcome } = require("./ui");
-      displayWelcome();
-    });
-  } else if (userInput.choice == "7") {
-    //Bobby: Removes a product from the system
-    promptGetActiveUserProducts(userInput.choice).then(prodData => {
-      console.log("Remove product from the system", prodData);
-      const { displayWelcome } = require("./ui");
-      displayWelcome();
-    });
-  }
-  else if (userInput.choice == "8") {
-    // AH & JT CALLS PROMPTS FROM PRODUCTSCTRL
-    promptUpdateProduct();
-  }
-  else if (userInput.choice == "9") {
-   //(DR) calls getStaleProducts from product model
-      listStaleProducts();
-      // const { displayWelcome } = require("./ui");
-      // displayWelcome();
-    
-  }
-  else if (userInput.choice == "10") {
-    //(DR) calls getCustRevenue from customer model
-    getCustRevenue().then(Data => {
-      console.log("Data", Data);
-      const { displayWelcome } = require("./ui");
-      displayWelcome();
-    });
-  }
-  else if (userInput.choice == '12'){
-    console.log('Thank you for using Bangazon!');
-  }
-  else {
-    //Josh: FORCES USER TO SELECT AVAILABLE NUMBER
+  } else {
     const { displayWelcome } = require("./ui");
     displayWelcome();
-    console.log("Please select a number");    
+    console.log("Please select a number");        
   }
 };
 
