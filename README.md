@@ -88,6 +88,16 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 1. To choose an Active Customer the user must first choose Option #2 from the menu. 
 2. After option 2 is selected. The User will then choose an Active Customer.  
 
+## 4. Add Products To Sell
+1. To add products to sell the user must first choose Option #2 to and choose a active customer. 
+2. After option 2 is selected. The User will then be prompted to fill in the Product Information.
+3. The User will then enter:
+    1. Product Name.
+    2. Product Price.
+    3. Product Description.
+    4. Product Type. 
+ 4. Then the Product to sell will be created.
+
 ## 7. Remove Customer Product
 1. To remove a product from the the database, the user must first select option #7. 
 2. After option #7 is selected, the User will then be given a list of products related to the active customer that are not currently active on orders. 
