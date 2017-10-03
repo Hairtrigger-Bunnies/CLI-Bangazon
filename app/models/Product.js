@@ -71,7 +71,7 @@ module.exports.getActiveProducts = () => {
     db.all(
       `SELECT Products.ProductID, Products.title, Products.price, Products.description, Products.customer_id FROM Products 
             LEFT OUTER JOIN Order_Products ON Products.ProductID = Order_Products.ProductID
-            WHERE customer_id = ${customer_id} AND Order_Products .OrderProductID IS NULL;`,
+            WHERE customer_id = ${customer_id} AND Order_Products.OrderProductID IS NULL;`,
       (err, Data) => {
         if (err) return reject(err);
         resolve(Data);
