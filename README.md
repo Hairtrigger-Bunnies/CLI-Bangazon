@@ -88,6 +88,30 @@ Download and use any text editor of your choosing: SublimeText, VS Code, etc.
 1. To choose an Active Customer the user must first choose Option #2 from the menu. 
 2. After option 2 is selected. The User will then choose an Active Customer.  
 
+## 3. Add Payment Option
+1. To add a payment option to the customer account, first you must select option 1 or 2 to create a new customer or select an existing customer.
+2. Once customer option is selected, enter in option 3 to be taken to the payment options.
+3. You'll first be prompted to enter in which type of payment card you wish to have on file (Visa, Amex, Mastercard, etc.). Type in one option and hit enter.
+4. Then, you will enter in the card number associated with the type of credit/debit card you want to store.
+5. Hitting enter saves the payment information to the user account and can be used for future order completions. 
+
+## 4. Add Products To Sell
+1. To add products to sell the user must first choose Option #2 to and choose a active customer. 
+2. After option 2 is selected. The User will then be prompted to fill in the Product Information.
+3. The User will then enter:
+    1. Product Name.
+    2. Product Price.
+    3. Product Description.
+    4. Product Type. 
+ 4. Then the Product to sell will be created.
+ 
+ ## 5. Add product to shopping cart
+1. When the customer selects option 5, they are prompted to choose a product from the list. Adding a product when there is no available "cart" will create a new order upon adding a product, and any subsequent products will be added to that order until it it fullfiled by selecting a payment type
+
+
+## 6. Complete an order
+1. To complete an order, the user will have to choose a payment option (set up through option #3) which will add the payment type to the order and close it. Products on closed orders will now be available when searching the customers' revenue report. Any new products added will be placed on a new order ticket.
+
 ## 7. Remove Customer Product
 1. To remove a product from the the database, the user must first select option #7. 
 2. After option #7 is selected, the User will then be given a list of products related to the active customer that are not currently active on orders. 
