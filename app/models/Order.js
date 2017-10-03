@@ -69,11 +69,11 @@ module.exports.addOrderProduct = data => {
 };
 
 //Josh: THIS FUNCTION INSERTS CHOSEN PAYMENT TYPE TO ORDER
-module.exports.addPaymentTypeToOrder = data => {
-  let customer_id = getActiveCustomer();
-  return new Promise((resolve, reject) => {
-    db.run(`UPDATE Orders 
-						SET payment_type_id = ${data.name}
-						WHERE payment_type_id is null and customer_id = ${customer_id}`);
-  });
-};
+module.exports.addPaymentTypeToOrder = (data) => {
+	let customer_id = getActiveCustomer();
+	return new Promise( (resolve, reject) => {
+		db.run(`UPDATE Orders 
+						SET payment_type_id = ${data.paytype_id}
+						WHERE payment_type_id is null and customer_id = ${customer_id}`)
+	})
+}
