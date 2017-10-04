@@ -51,17 +51,21 @@ module.exports.promptCompleteOrder = () => {
 module.exports.promptAddProductToOrder = () => {
   return new Promise((resolve, reject) => {
     console.log("");
+    // let regArr = [];
     getAllProducts().then(data => {
       for (let i = 0; i < data.length; i++) {
         console.log(
-          `  ${magenta(data[i].ProductID + ".")} ${data[i].title} ${data[i]
-            .price} ${data[i].description}`
+          `  ${magenta(data[i].ProductID + ".")} ${data[i].title} ${data[i].price} ${data[i].description}`
         );
+        // regArr.push(data[i].ProductID);
       }
+      // let reg = new RegExp('^[1-' + regArr.length + ']$');      
       console.log("");
       prompt.get(
         [
           {
+            // pattern: reg,
+            // message: 'Please only enter an existing number',
             name: "name",
             description: "Choose product to add to order",
             type: "string",
@@ -71,6 +75,7 @@ module.exports.promptAddProductToOrder = () => {
         function(err, results) {
           if (err) return reject(err);
           //Josh: ADDS ACTIVE CUSTOMER ID TO RESULTS
+          // results.product_id = regArr[parseInt(results.name) - 1];
           results.customer_id = getActiveCustomer();
           resolve(results);
         }
