@@ -20,14 +20,14 @@ module.exports.promptActiveCustomer = () => {
           `  ${magenta([i + 1] + ".")} ${data[i].first_name} ${data[i].last_name}`)
           regArr.push(data[i].CustomerID);
       }
-      let reg = new RegExp('^[1-' + regArr.length + ']$');
+      // let reg = new RegExp('^[1-' + regArr.length + ']$');
       
       console.log("");
       prompt.get(
         [
           {
-            pattern: reg,
-            message: 'Please only enter an existing number',
+            // pattern: reg,
+            // message: 'Please only enter an existing number',
             name: "id",
             description: "Choose customer to set active",
             type: "string",
